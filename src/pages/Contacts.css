@@ -1,0 +1,21 @@
+.contacts-list {
+    text-align: left;
+}
+.map {
+    height: 400px;
+    width: 100%;
+    background-color: gray;
+}
+.contacts-text {
+    text-align: left;
+    display: flex;
+}
+.contacts-map__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contacts-text__wrap {
+    display: flex;
+    align-items: center;
+}

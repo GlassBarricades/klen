@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
       <AppHeader />
-      <main className="container d-flex flex-column align-items-center">
+      <main className="container-fluid d-flex flex-column align-items-center">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about-us" element={<AboutUs />} />

@@ -1,0 +1,20 @@
+.about-us-one-img {
+    width: 500px;
+    height: 400px;
+    background-color: gray;
+}
+.about-us-one-img__wrap {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-us-one-text__wrap {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.about-us-one-text {
+    height: 100%;
+    font-size: 1.2em;
+}

@@ -1,8 +1,11 @@
+import HeroTitle from "../components/UI/Hero-title";
 import "./Blog.css";
 
 const Blog = () => {
     return (
-        <h1>Блог</h1>
+        <>
+            <HeroTitle text={"Блог"} />
+        </>
     )
 }
 export default Blog;
