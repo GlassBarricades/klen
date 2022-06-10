@@ -5,6 +5,8 @@ import AboutUs from "./pages/About-us";
 import Price from "./pages/Price";
 import Blog from "./pages/Blog";
 import Contacts from "./pages/Contacts";
+import MetalWork from './pages/Metal-work';
+import Coloring from './pages/Coloring';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -22,6 +24,8 @@ function App() {
                 <Route path="/price" element={<Price />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/contacts" element={<Contacts />} />
+                <Route path="/metal-work" element={<MetalWork />} />
+                <Route path="/coloring" element={<Coloring />} />
               </Routes>
             </main>
             <AppFooter />

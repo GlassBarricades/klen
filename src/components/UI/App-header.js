@@ -21,12 +21,16 @@ const AppHeader = () => {
               <Nav.Link>О нас</Nav.Link>
             </LinkContainer>
             <NavDropdown title="Услуги" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">
+              <LinkContainer to="/metal-work">
+              <NavDropdown.Item>
                 Металлообработка
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
+              </LinkContainer>
+              <LinkContainer to="/coloring">
+              <NavDropdown.Item>
                 Полимерное окрашивание
               </NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
             <NavDropdown title="Производство" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action5">Хозинвентарь</NavDropdown.Item>

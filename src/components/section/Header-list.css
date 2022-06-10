@@ -1,0 +1,16 @@
+.header-list-text__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.header-list-descr {
+    max-width: 800px;
+    text-align: center;
+    font-size: 1.1em;
+}
+.header-list-card {
+    min-height: 100%;
+    text-align: left;
+    font-size: 1.1em;
+}

@@ -6,7 +6,7 @@ import { Instagram, Facebook, Whatsapp } from "react-bootstrap-icons";
 const AppFooter = () => {
   return (
     <Navbar bg="light" expand="lg">
-      <Container>
+      <Container className="mt-3 mb-3">
         <Row className="footer-wrap">
           <Col md={4} xs={12} className="footer-text__wrap">
             <Navbar.Brand as={Link} to="/">
