@@ -33,6 +33,11 @@ const AppHeader = () => {
               </LinkContainer>
             </NavDropdown>
             <NavDropdown title="Производство" id="navbarScrollingDropdown">
+            <LinkContainer to="/catalog">
+              <NavDropdown.Item>
+                Весь каталог
+              </NavDropdown.Item>
+              </LinkContainer>
               <NavDropdown.Item href="#action5">Хозинвентарь</NavDropdown.Item>
               <NavDropdown.Item href="#action6">
                 Мебельная фурнитура
