@@ -8,6 +8,7 @@ import Contacts from "./pages/Contacts";
 import MetalWork from "./pages/Metal-work";
 import Coloring from "./pages/Coloring";
 import Catalog from "./pages/Catalog";
+import Admin from "./pages/Admin";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/metal-work" element={<MetalWork />} />
             <Route path="/coloring" element={<Coloring />} />
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/admin/*" element={<Admin />} />
           </Routes>
         </main>
         <AppFooter />

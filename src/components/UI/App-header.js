@@ -64,6 +64,9 @@ const AppHeader = () => {
               <Nav.Link>Контакты</Nav.Link>
             </LinkContainer>
           </Nav>
+          <LinkContainer to="/admin">
+              <Nav.Link>Админ</Nav.Link>
+            </LinkContainer>
           <Button variant="outline-success">Заказать консультацию</Button>
         </Navbar.Collapse>
       </Container>

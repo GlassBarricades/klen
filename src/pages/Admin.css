@@ -1,0 +1,15 @@
+.admin {
+    min-height: 60vh;
+}
+.admin-inner {
+    height: 100%;
+}
+.admin-inner .nav-pills .nav-link.active {
+    background-color: red;
+}
+.admin-sidebar {
+    height: 100%;
+}
+.admin-content {
+    height: 100%;
+}
