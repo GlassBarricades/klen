@@ -17,8 +17,12 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [products, setProducts] = useState([]);
+  const [productsCategory, setProductsCategory] = useState([]);
   const [top, setTop] = useState("");
   const [news, setNews] = useState("");
+  const [img, setImg] = useState("");
+  const [descr, setDescr] = useState("");
+  const [dimensions, setDimensions] = useState("");
   const [find, setFind] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [tempUuid, setTempUuid] = useState("");
@@ -38,6 +42,20 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     });
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    onValue(ref(db, `/category/`), (snapshot) => {
+      setProductsCategory([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((product) =>
+          setProductsCategory((oldArray) => [...oldArray, product])
+        );
+        setLoading(false);
+      }
+    });
+  }, []);
+
   const resetState = () => {
     setName("");
     setSubname("");
@@ -45,6 +63,9 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     setPrice("");
     setTop("");
     setNews("");
+    setImg("");
+    setDescr("");
+    setDimensions("");
   };
 
   const closeReset = () => {
@@ -70,6 +91,9 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
       price,
       top,
       news,
+      img,
+      descr,
+      dimensions,
       uuid,
     });
 
@@ -86,6 +110,9 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     setPrice(product.price);
     setTop(product.top);
     setNews(product.news);
+    setImg(product.img);
+    setDescr(product.descr);
+    setDimensions(product.dimensions);
     handleShow();
   };
   const handleSubmitChange = () => {
@@ -96,6 +123,9 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
       price,
       top,
       news,
+      img,
+      descr,
+      dimensions,
       uuid: tempUuid,
     });
 
@@ -103,6 +133,10 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     handleClose();
     setIsEdit(false);
   };
+
+    const createCategories = productsCategory.map((item) => {
+      return item.name;
+    });
 
   const createFormForModal = () => {
     return (
@@ -128,16 +162,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             label="Категории"
             value={category}
             handler={(e) => setCategory(e.target.value)}
-            options={[
-              "Выберите категорию",
-              "Хозинвентарь",
-              "Мебельная фурнитура",
-              "Спецпродукция",
-              "Кронштейны и крепежные системы",
-              "Малые архитектурные формы",
-              "Холодная вытяжка металла",
-              "Другое",
-            ]}
+            options={createCategories}
             required
           />
           <AppInput
@@ -161,6 +186,32 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             value={news}
             label="Новинка"
             onChange={(e) => console.log(e.target.value)}
+          />
+          <AppInput
+            type="text"
+            label="Картинка"
+            placeholder="Картинка"
+            value={img}
+            handler={(e) => setImg(e.target.value)}
+            required
+          />
+          <AppInput
+            type="text"
+            label="Описание"
+            placeholder="Описание"
+            value={descr}
+            handler={(e) => setDescr(e.target.value)}
+            required
+            as="textarea"
+            rows={3}
+          />
+          <AppInput
+            type="text"
+            label="Размеры"
+            placeholder="Размеры"
+            value={dimensions}
+            handler={(e) => setDimensions(e.target.value)}
+            required
           />
         </Form.Group>
       </Form>
@@ -204,6 +255,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
                 <th>Цена</th>
                 <th>Товар месяца</th>
                 <th>Новинка</th>
+                <th>Фото</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
               </tr>
@@ -217,6 +269,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
                   <td>{product.price}</td>
                   <td>{product.top}</td>
                   <td>{product.news}</td>
+                  <td><img height="30" width="auto" src={product.img} alt={product.name} /></td>
                   <td>
                     <Button
                       onClick={() => handleDelete(product, "products")}

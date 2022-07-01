@@ -9,6 +9,9 @@ const AdmNav = () => {
       <LinkContainer to="/admin/adm-products">
         <Nav.Link>Товары</Nav.Link>
       </LinkContainer>
+      <LinkContainer to="/admin/adm-category">
+        <Nav.Link>Категории</Nav.Link>
+      </LinkContainer>
       <LinkContainer to="/admin/adm-articles">
         <Nav.Link>Статьи</Nav.Link>
       </LinkContainer>

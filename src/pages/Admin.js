@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import AdmProducts from "./admin/Adm-products";
 import AdmNav from "../components/admin/Adm-nav";
 import AdmArticles from "./admin/Adm-articles";
+import AdmCategory from "./admin/Adm-category";
 import { db } from "../firebase";
 import { ref, remove } from "firebase/database";
 
@@ -28,8 +29,9 @@ const Admin = () => {
           </Col>
           <Col md={10} className="admin-content">
         <Routes>
-          <Route path="/adm-products" element={<AdmProducts handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete}/>} />
-          <Route path="/adm-articles" element={<AdmArticles />} />
+          <Route path="/adm-products" element={<AdmProducts handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete} />} />
+          <Route path="/adm-category" element={<AdmCategory handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete}/>} />
+          <Route path="/adm-articles" element={<AdmArticles handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete} />} />
         </Routes>
           </Col>
         </Row>
