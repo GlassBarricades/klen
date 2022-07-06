@@ -1,103 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { db } from "../firebase";
+import { ref, onValue } from "firebase/database";
 import { Container, Row, Col, Card, Button, Modal, Form, FloatingLabel, Nav } from "react-bootstrap";
 import HeroTitle from "../components/UI/Hero-title";
+import Loader from "../components/admin/Loader";
 import "./Catalog.css";
 
 const Catalog = () => {
-  const [catalog, setCatalog] = useState([
-    {
-      id: 1,
-      name: "Лопата УС 1",
-      subname: "Лопата снеговая алюминиевая",
-      category: "Хозинвентарь",
-      price: 25,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/830061352%D0%9B%D0%BE%D0%BF%D0%B0%D1%82%D0%B0%20%D1%81%D0%BD%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%A3%D0%A1%201.jpg",
-      description:
-        "С железным наконечником железное крепление к черенку на болтах",
-      workspace: "480*300*1,5",
-      height: "40 мм"
-    },
-    {
-      id: 2,
-      name: "Лопата УС 2",
-      subname: "Лопата снеговая УС 2",
-      category: "Хозинвентарь",
-      price: 48.31,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/16563180341.jpg",
-      description:
-        "Изготовлена из дюраля твердых сортов с закаленным железным наконечником  на металлических заклепках. Используется в качестве, как лопаты, так и скребка. Максимальная износостойкость.",
-      workspace: "480*480*2мм",
-      height: ""
-    },
-    {
-      id: 3,
-      name: "Ледоруб",
-      subname: "Ледоруб",
-      category: "Хозинвентарь",
-      price: 13.54,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/1020891613%D0%9B%D0%B5%D0%B4%D0%BE%D1%80%D1%83%D0%B1.jpg",
-      description:
-        "Коленная высококачественная сталь способная выдержать максимальные нагрузки",
-      workspace: "10*20 см",
-      height: ""
-    },
-    {
-      id: 5,
-      name: "Лопата стальная",
-      subname: "Лопата снеговая Стальная",
-      category: "Хозинвентарь",
-      price: 11,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/848925032%D0%9B%D0%BE%D0%BF%D0%B0%D1%82%D0%B0%20%D1%81%D0%BD%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.jpg",
-      description:
-        "С нанесенным полимерным покрытием",
-      workspace: "48*30 см",
-      height: ""
-    },
-    {
-      id: 5,
-      name: "Лопата стальная",
-      subname: "Лопата снеговая Стальная",
-      category: "Хозинвентарь",
-      price: 11,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/848925032%D0%9B%D0%BE%D0%BF%D0%B0%D1%82%D0%B0%20%D1%81%D0%BD%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.jpg",
-      description:
-        "С нанесенным полимерным покрытием",
-      workspace: "48*30 см",
-      height: ""
-    },
-    {
-      id: 5,
-      name: "Лопата стальная",
-      subname: "Лопата снеговая Стальная",
-      category: "Хозинвентарь",
-      price: 11,
-      top: false,
-      new: false,
-      image:
-        "http://klen-m.by/images/products/848925032%D0%9B%D0%BE%D0%BF%D0%B0%D1%82%D0%B0%20%D1%81%D0%BD%D0%B5%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%81%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F.jpg",
-      description:
-        "С нанесенным полимерным покрытием",
-      workspace: "48*30 см",
-      height: ""
-    },
-  ]);
+  const [catalog, setCatalog] = useState([]);
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    onValue(ref(db, `/products/`), (snapshot) => {
+      setCatalog([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((product) =>
+          setCatalog((oldArray) => [...oldArray, product])
+        );
+        setLoading(false);
+      }
+    });
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = (item) => {
@@ -107,11 +34,20 @@ const Catalog = () => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+    {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{data.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{data.description}</Modal.Body>
+        <Modal.Body>
+          <Row>
+          <img height="auto" width="200" src={data.img} alt={data.name} />
+          </Row>
+          {data.descr}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Закрыть
@@ -127,7 +63,7 @@ const Catalog = () => {
                 return (
                   <Col key={key} className="mb-3">
                     <Card border="light" style={{ width: '18rem' }} className="shadow p-3">
-                      <Card.Img className="catalog-card__img" variant="top" src={item.image} />
+                      <Card.Img className="catalog-card__img" variant="top" src={item.img} />
                       <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
                         <Card.Text>{item.price} бел. руб</Card.Text>
@@ -161,6 +97,8 @@ const Catalog = () => {
           </Col>
         </Row>
       </Container>
+        </>
+      )}
     </>
   );
 };

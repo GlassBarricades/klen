@@ -97,7 +97,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
       uuid,
     });
 
-    console.log(products)
     resetState();
     handleClose();
   };
