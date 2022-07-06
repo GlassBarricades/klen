@@ -1,4 +1,21 @@
+.catalog-card {
+    max-height: 20em;
+    min-height: 20em;
+    min-width: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.catalog-card .card-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 50%;
+    justify-content: flex-end;
+}
 .catalog-card__img {
-    max-height: auto;
-    max-width: 190px;
+    height: auto;
+    max-width: 10rem;
+    max-height: 8rem;
 }

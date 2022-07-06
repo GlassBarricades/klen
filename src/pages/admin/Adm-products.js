@@ -18,8 +18,8 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [price, setPrice] = useState("");
   const [products, setProducts] = useState([]);
   const [productsCategory, setProductsCategory] = useState([]);
-  const [top, setTop] = useState("");
-  const [news, setNews] = useState("");
+  const [top, setTop] = useState(false);
+  const [news, setNews] = useState(false);
   const [img, setImg] = useState("");
   const [descr, setDescr] = useState("");
   const [dimensions, setDimensions] = useState("");
@@ -133,9 +133,17 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     setIsEdit(false);
   };
 
-    const createCategories = productsCategory.map((item) => {
-      return item.name;
-    });
+  const handlerChangeNews = () => {
+		setNews(!news);
+	}
+
+  const handlerChangeTop = () => {
+		setTop(!top);
+	}
+
+  const createCategories = productsCategory.map((item) => {
+    return item.name;
+  });
 
   const createFormForModal = () => {
     return (
@@ -177,14 +185,16 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             id="custom-switch"
             value={top}
             label="Товар месяца"
-            onChange={(e) => setTop(e.target.value)}
+            onChange={handlerChangeTop}
+            checked={top}
           />
           <Form.Check
             type="switch"
-            id="custom-switch"
+            id="news-switch"
             value={news}
             label="Новинка"
-            onChange={(e) => console.log(e.target.value)}
+            onChange={handlerChangeNews}
+            checked={news}
           />
           <AppInput
             type="text"
@@ -266,9 +276,16 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
                   <td>{product.subname}</td>
                   <td>{product.category}</td>
                   <td>{product.price}</td>
-                  <td>{product.top}</td>
-                  <td>{product.news}</td>
-                  <td><img height="30" width="auto" src={product.img} alt={product.name} /></td>
+                  <td>{product.top ? <span>да</span> : <span>нет</span>}</td>
+                  <td>{product.news ? <span>да</span> : <span>нет</span>}</td>
+                  <td>
+                    <img
+                      height="30"
+                      width="auto"
+                      src={product.img}
+                      alt={product.name}
+                    />
+                  </td>
                   <td>
                     <Button
                       onClick={() => handleDelete(product, "products")}

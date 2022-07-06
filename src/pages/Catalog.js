@@ -62,7 +62,7 @@ const Catalog = () => {
               {catalog.map((item, key) => {
                 return (
                   <Col key={key} className="mb-3">
-                    <Card border="light" style={{ width: '18rem' }} className="shadow p-3">
+                    <Card border="light" style={{ width: '18rem' }} className="shadow p-3 catalog-card">
                       <Card.Img className="catalog-card__img" variant="top" src={item.img} />
                       <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
