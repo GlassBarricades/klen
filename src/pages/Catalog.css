@@ -1,7 +1,6 @@
 .catalog-card {
     max-height: 20em;
     min-height: 20em;
-    min-width: 18rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
+import { Button } from "@mantine/core";
 
 const EditBtn = ({handleSubmitChange, text}) => {
   return (
-    <Button variant="primary" type="submit" onClick={handleSubmitChange}>
+    <Button variant="gradient" gradient={{ from: 'teal', to: 'blue', deg: 60 }} type="submit" onClick={handleSubmitChange}>
       {text}
     </Button>
   );

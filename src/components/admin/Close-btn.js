@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
+import { Button } from "@mantine/core";
 
 const CloseBtn = ({handleClose, text}) => {
   return (
-    <Button variant="secondary" onClick={handleClose}>
+    <Button variant="gradient" gradient={{ from: 'orange', to: 'red' }} onClick={handleClose}>
       {text}
     </Button>
   );
