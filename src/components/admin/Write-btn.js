@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
+import { Button } from "@mantine/core";
 
 const WriteBtn = ({text, id}) => {
   return (
-    <Button variant="primary" type="submit" form={id}>
+    <Button color="blue" type="submit" form={id}>
       {text}
     </Button>
   );

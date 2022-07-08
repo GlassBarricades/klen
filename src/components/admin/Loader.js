@@ -1,13 +1,11 @@
-import { Spinner } from "react-bootstrap";
+import { Loader } from "@mantine/core";
 import "./Loader.css";
 
-const Loader = () => {
+const LoaderSpinner = () => {
   return (
     <div className="loader-wrap">
-      <Spinner className="mt-5" animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Loader size="lg" w="md" color="green" variant="bars" />
     </div>
   );
 };
-export default Loader;
+export default LoaderSpinner;

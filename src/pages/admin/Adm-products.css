@@ -1,0 +1,12 @@
+.find-input {
+    max-width: 25rem;
+}
+.control-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.table-wrap {
+    height: 52vh;
+}

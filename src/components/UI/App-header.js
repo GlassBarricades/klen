@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar, Button, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
 import "./App-header.css";
@@ -67,7 +67,6 @@ const AppHeader = () => {
           <LinkContainer to="/admin">
               <Nav.Link>Админ</Nav.Link>
             </LinkContainer>
-          <Button variant="outline-success">Заказать консультацию</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>

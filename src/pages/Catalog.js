@@ -2,14 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { ref, onValue } from "firebase/database";
 import { Row, Modal, Form, FloatingLabel, Nav } from "react-bootstrap";
-import {
-  Container,
-  Grid,
-  Button,
-  Card,
-  Image,
-  Text,
-} from "@mantine/core";
+import { Container, Grid, Button, Card, Image, Text } from "@mantine/core";
 import HeroTitle from "../components/UI/Hero-title";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
@@ -72,44 +65,24 @@ const Catalog = () => {
                       <Grid.Col md={4} sm={6} key={key} className="mb-3">
                         <Card shadow="sm" p="lg">
                           <Card.Section>
-                            <Image src={item.img} height={200} alt="Norway" />
+                            <Image fit="contain" src={item.img} height={200} alt="Norway" />
                           </Card.Section>
-                            <Text size="lg" align="center" weight={500} v="lg">
-                              {item.name}
-                            </Text>
-                            <Text align="center" weight={500}>
-                              {item.price} руб
-                            </Text>
+                          <Text size="lg" align="center" weight={500} v="lg">
+                            {item.name}
+                          </Text>
+                          <Text align="center" weight={500}>
+                            {item.price} руб
+                          </Text>
                           <Button
-                              variant="light"
-                              color="blue"
-                              fullWidth
-                              style={{ marginTop: 14 }}
-                              onClick={() => handleShow(item)}
-                            >
-                              Подробнее
-                            </Button>
+                            variant="light"
+                            color="blue"
+                            fullWidth
+                            style={{ marginTop: 14 }}
+                            onClick={() => handleShow(item)}
+                          >
+                            Подробнее
+                          </Button>
                         </Card>
-                        {/* <Card
-                          border="light"
-                          className="shadow p-3 catalog-card"
-                        >
-                          <Card.Img
-                            className="catalog-card__img"
-                            variant="top"
-                            src={item.img}
-                          />
-                          <Card.Body>
-                            <Card.Title>{item.name}</Card.Title>
-                            <Card.Text>{item.price} бел. руб</Card.Text>
-                            <Button
-                               variant="gradient" gradient={{ from: 'teal', to: 'blue', deg: 60 }}
-                              onClick={() => handleShow(item)}
-                            >
-                              Подробнее
-                            </Button>
-                          </Card.Body>
-                        </Card> */}
                       </Grid.Col>
                     );
                   })}

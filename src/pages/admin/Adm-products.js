@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { Table, Grid, Button, ScrollArea } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, onValue, update } from "firebase/database";
@@ -7,7 +8,7 @@ import ModalWriteDb from "../../components/admin/Modal-write-db";
 import AppInput from "../../components/admin/App-input";
 import AppSelect from "../../components/admin/App-select";
 import SearchInput from "../../components/admin/Search-input";
-import Loader from "../../components/admin/Loader";
+import LoaderSpinner from "../../components/admin/Loader";
 
 import "./Adm-products.css";
 
@@ -134,12 +135,12 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   };
 
   const handlerChangeNews = () => {
-		setNews(!news);
-	}
+    setNews(!news);
+  };
 
   const handlerChangeTop = () => {
-		setTop(!top);
-	}
+    setTop(!top);
+  };
 
   const createCategories = productsCategory.map((item) => {
     return item.name;
@@ -240,73 +241,70 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
         title={"Добавление продукта"}
         titleE={"Изменение данных о продукте"}
       ></ModalWriteDb>
-      <Button onClick={handleShow}>Добавить продукт</Button>
+      <div className="control-wrap">
+      <Button color="blue" onClick={handleShow}>Добавить продукт</Button>
       <SearchInput
         classes="mt-3 find-input"
         handler={(e) => setFind(e.target.value)}
       />
+      </div>
       {loading ? (
-        <Loader />
+        <LoaderSpinner />
       ) : (
-        <div className="adm-drivers-wrap">
-          <Table
-            className="container mt-3 adm-drivers"
-            bordered
-            hover
-            responsive
-            size="sm"
-          >
-            <thead>
-              <tr>
-                <th>Название</th>
-                <th>Полное название</th>
-                <th>Категория</th>
-                <th>Цена</th>
-                <th>Товар месяца</th>
-                <th>Новинка</th>
-                <th>Фото</th>
-                <th>Удалить</th>
-                <th>Изменить</th>
+        <ScrollArea className="table-wrap">
+          <Table verticalSpacing="sm" highlightOnHover>
+          <thead>
+            <tr>
+              <th style={{textAlign: "center"}}>Фото</th>
+              <th>Название</th>
+              <th>Категория</th>
+              <th>Цена</th>
+              <th style={{textAlign: "center"}}>Товар месяца</th>
+              <th style={{textAlign: "center"}}>Новинка</th>
+              <th style={{textAlign: "center"}}>Удалить</th>
+              <th style={{textAlign: "center"}}>Изменить</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredProducts?.map((product, key) => (
+              <tr key={key}>
+                <td>
+                 <Grid justify="center">
+                 <img
+                    height="30"
+                    width="auto"
+                    src={product.img}
+                    alt={product.name}
+                  />
+                 </Grid>
+                </td>
+                <td>{product.name}</td>
+                <td>{product.category}</td>
+                <td>{product.price}</td>
+                <td style={{textAlign: "center"}}>{product.top ? <span>да</span> : <span>нет</span>}</td>
+                <td style={{textAlign: "center"}}>{product.news ? <span>да</span> : <span>нет</span>}</td>
+                <td>
+                  <Grid justify="center">
+                  <Button
+                    color="orange"
+                    onClick={() => handleDelete(product, "products")}
+                  >
+                    Удалить
+                  </Button>
+                  </Grid>
+                </td>
+                <td>
+                  <Grid justify="center">
+                  <Button color="teal" onClick={() => handleEdit(product)}>
+                    Изменить
+                  </Button>
+                  </Grid>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredProducts?.map((product, key) => (
-                <tr key={key}>
-                  <td>{product.name}</td>
-                  <td>{product.subname}</td>
-                  <td>{product.category}</td>
-                  <td>{product.price}</td>
-                  <td>{product.top ? <span>да</span> : <span>нет</span>}</td>
-                  <td>{product.news ? <span>да</span> : <span>нет</span>}</td>
-                  <td>
-                    <img
-                      height="30"
-                      width="auto"
-                      src={product.img}
-                      alt={product.name}
-                    />
-                  </td>
-                  <td>
-                    <Button
-                      onClick={() => handleDelete(product, "products")}
-                      variant="warning"
-                    >
-                      Удалить
-                    </Button>
-                  </td>
-                  <td>
-                    <Button
-                      onClick={() => handleEdit(product)}
-                      variant="success"
-                    >
-                      Изменить
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+            ))}
+          </tbody>
+        </Table>
+        </ScrollArea>
       )}
     </>
   );

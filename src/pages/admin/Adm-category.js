@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { Button, ScrollArea, Table } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, onValue, update } from "firebase/database";
@@ -96,11 +97,13 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
       title={"Добавление Категории"}
       titleE={"Изменение данных о Категории"}
     ></ModalWriteDb>
-    <Button onClick={handleShow}>Добавить Категорию</Button>
+    <div className="control-wrap">
+    <Button color="blue" onClick={handleShow}>Добавить Категорию</Button>
+    </div>
     {loading ? (
       <Loader />
     ) : (
-      <div className="adm-drivers-wrap">
+      <ScrollArea className="adm-drivers-wrap">
         <Table
           className="container mt-3 adm-drivers"
           bordered
@@ -122,7 +125,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
                 <td>
                   <Button
                     onClick={() => handleDelete(category, "category")}
-                    variant="warning"
+                    color="orange"
                   >
                     Удалить
                   </Button>
@@ -130,7 +133,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
                 <td>
                   <Button
                     onClick={() => handleEdit(category)}
-                    variant="success"
+                    color="teal"
                   >
                     Изменить
                   </Button>
@@ -139,7 +142,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
             ))}
           </tbody>
         </Table>
-      </div>
+      </ScrollArea>
     )}
   </>)
 };
