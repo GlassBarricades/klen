@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { ref, onValue } from "firebase/database";
-import { Row, Modal, Form, FloatingLabel, Nav } from "react-bootstrap";
-import { Container, Grid, Button, Card, Image, Text } from "@mantine/core";
+import { Form, FloatingLabel, Nav } from "react-bootstrap";
+import {
+  Container,
+  Grid,
+  Button,
+  Card,
+  Image,
+  Text,
+  Modal,
+} from "@mantine/core";
 import HeroTitle from "../components/UI/Hero-title";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
@@ -39,8 +47,25 @@ const Catalog = () => {
         <Loader />
       ) : (
         <>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+          <Modal
+            centered
+            size="70%"
+            opened={show}
+            onClose={handleClose}
+            title={data.name}
+          >
+            <Grid>
+              <Grid.Col md={6}>
+                <Image
+                  height={400}
+                  fit="contain"
+                  src={data.img}
+                  alt={data.name}
+                />
+              </Grid.Col>
+              <Grid.Col md={6}>2</Grid.Col>
+            </Grid>
+            {/* <Modal.Header closeButton>
               <Modal.Title>{data.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -53,7 +78,7 @@ const Catalog = () => {
               <Button color="gray" onClick={handleClose}>
                 Закрыть
               </Button>
-            </Modal.Footer>
+            </Modal.Footer> */}
           </Modal>
           <HeroTitle text={"Каталог"} />
           <Container size="xl" px="xs">
@@ -65,7 +90,12 @@ const Catalog = () => {
                       <Grid.Col md={4} sm={6} key={key} className="mb-3">
                         <Card shadow="sm" p="lg">
                           <Card.Section>
-                            <Image fit="contain" src={item.img} height={200} alt="Norway" />
+                            <Image
+                              fit="contain"
+                              src={item.img}
+                              height={200}
+                              alt="Norway"
+                            />
                           </Card.Section>
                           <Text size="lg" align="center" weight={500} v="lg">
                             {item.name}

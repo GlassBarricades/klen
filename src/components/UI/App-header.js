@@ -1,19 +1,17 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container } from '@mantine/core';
 import { Link } from "react-router-dom";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
 import "./App-header.css";
 
 const AppHeader = () => {
   return (
-    <Navbar bg="light" expand="lg" sticky="top">
-      <Container>
+    <>
         <Navbar.Brand s={Link} to="/">
           <img src="http://klen-m.by/images/klen-logo.png" alt="klen" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav defaultActiveKey="/" className="mx-auto my-2 my-lg-0">
+          <Nav defaultActiveKey="/" className="d-none d-lg-flex">
             <LinkContainer to="/">
               <Nav.Link>Главная</Nav.Link>
             </LinkContainer>
@@ -63,13 +61,11 @@ const AppHeader = () => {
             <LinkContainer to="/contacts">
               <Nav.Link>Контакты</Nav.Link>
             </LinkContainer>
-          </Nav>
-          <LinkContainer to="/admin">
+            <LinkContainer to="/admin">
               <Nav.Link>Админ</Nav.Link>
             </LinkContainer>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </Nav>
+          </>
   );
 };
 export default AppHeader;
