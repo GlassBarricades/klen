@@ -11,7 +11,6 @@ import {
   Text,
   Modal,
 } from "@mantine/core";
-import HeroTitle from "../components/UI/Hero-title";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
 
@@ -80,14 +79,13 @@ const Catalog = () => {
               </Button>
             </Modal.Footer> */}
           </Modal>
-          <HeroTitle text={"Каталог"} />
-          <Container size="xl" px="xs">
+          <Container fluid>
             <Grid className="mt-5 mb-5">
               <Grid.Col md={9}>
                 <Grid align="flex-end">
                   {catalog.map((item, key) => {
                     return (
-                      <Grid.Col md={4} sm={6} key={key} className="mb-3">
+                      <Grid.Col lg={3} md={4} sm={4} xs={6} key={key} className="mb-3">
                         <Card shadow="sm" p="lg">
                           <Card.Section>
                             <Image

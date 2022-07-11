@@ -13,33 +13,7 @@ import { Link } from 'react-router-dom';
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// import "./App.css";
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <div className="App">
-//         <AppHeader />
-//         <main className="container-fluid d-flex flex-column align-items-center">
-//           <Routes>
-//             <Route path="/" element={<Home />} />
-//             <Route path="/about-us" element={<AboutUs />} />
-//             <Route path="/price" element={<Price />} />
-//             <Route path="/blog" element={<Blog />} />
-//             <Route path="/contacts" element={<Contacts />} />
-//             <Route path="/metal-work" element={<MetalWork />} />
-//             <Route path="/coloring" element={<Coloring />} />
-//             <Route path="/catalog" element={<Catalog />} />
-//             <Route path="/admin/*" element={<Admin />} />
-//           </Routes>
-//         </main>
-//         <AppFooter />
-//       </div>
-//     </BrowserRouter>
-//   );
-// }
-
-// export default App;
+ import "./App.css";
 
 import React, { useState } from "react";
 import {
@@ -71,14 +45,15 @@ const App = () => {
         }}
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        fixed
         navbar={
           <Navbar
             p="md"
-            hiddenBreakpoint="xl"
+            hiddenBreakpoint="2800"
             hidden={!opened}
-            width={{ sm: 200, md: 200, lg: 300 }}
+            width={{ sm: 500 }}
+            px="10"
           >
+            <AppHeader responsive={"d-lg-none"} display={"d-flex"} column={"flex-column"}/>
           </Navbar>
         }
         footer={
@@ -92,7 +67,7 @@ const App = () => {
             fluid className="header-wrap"
               style={{ display: "flex", height: "100%" }}
             >
-              <AppHeader />
+              <AppHeader responsive={"d-lg-flex"} display={"d-none"}/>
               <MediaQuery largerThan="md" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}
@@ -106,7 +81,7 @@ const App = () => {
           </Header>
         }
       >
-        <main className="container-fluid d-flex flex-column align-items-center">
+        <Container fluid>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
@@ -118,7 +93,7 @@ const App = () => {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin/*" element={<Admin />} />
           </Routes>
-        </main>
+        </Container>
       </AppShell>
     </BrowserRouter>
   );

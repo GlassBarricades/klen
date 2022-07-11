@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
 import "./App-header.css";
 
-const AppHeader = () => {
+const AppHeader = ({column, display}) => {
+  const classez = `${display} d-lg-flex ${column}`;
   return (
     <>
         <Navbar.Brand s={Link} to="/">
           <img src="http://klen-m.by/images/klen-logo.png" alt="klen" />
         </Navbar.Brand>
-          <Nav defaultActiveKey="/" className="d-none d-lg-flex">
+          <Nav defaultActiveKey="/" className={classez}>
             <LinkContainer to="/">
               <Nav.Link>Главная</Nav.Link>
             </LinkContainer>
