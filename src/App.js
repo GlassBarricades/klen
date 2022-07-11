@@ -45,13 +45,13 @@ const App = () => {
         }}
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
+        fixed
         navbar={
           <Navbar
             p="md"
             hiddenBreakpoint="2800"
             hidden={!opened}
-            width={{ sm: 500 }}
-            px="10"
+            width={{ sm: 200, lg: 300 }}
           >
             <AppHeader responsive={"d-lg-none"} display={"d-flex"} column={"flex-column"}/>
           </Navbar>
