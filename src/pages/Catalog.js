@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { ref, onValue } from "firebase/database";
-import { Form, FloatingLabel, Nav } from "react-bootstrap";
-import {
-  Container,
-  Grid,
-  Button,
-  Card,
-  Image,
-  Text,
-  Modal,
-} from "@mantine/core";
+import { Container, Grid, Button, Card, Image, Text, Input } from "@mantine/core";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
+import ModalCatalog from "../components/UI/Modal-catalog";
+import { Search } from 'tabler-icons-react';
 
 const Catalog = () => {
   const [catalog, setCatalog] = useState([]);
@@ -46,46 +39,21 @@ const Catalog = () => {
         <Loader />
       ) : (
         <>
-          <Modal
-            centered
-            size="70%"
-            opened={show}
-            onClose={handleClose}
-            title={data.name}
-          >
-            <Grid>
-              <Grid.Col md={6}>
-                <Image
-                  height={400}
-                  fit="contain"
-                  src={data.img}
-                  alt={data.name}
-                />
-              </Grid.Col>
-              <Grid.Col md={6}>2</Grid.Col>
-            </Grid>
-            {/* <Modal.Header closeButton>
-              <Modal.Title>{data.name}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Row>
-                <img height="auto" width="200" src={data.img} alt={data.name} />
-              </Row>
-              {data.descr}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button color="gray" onClick={handleClose}>
-                Закрыть
-              </Button>
-            </Modal.Footer> */}
-          </Modal>
+          <ModalCatalog data={data} show={show} handleClose={handleClose} />
           <Container fluid>
             <Grid className="mt-5 mb-5">
               <Grid.Col md={9}>
                 <Grid align="flex-end">
                   {catalog.map((item, key) => {
                     return (
-                      <Grid.Col lg={3} md={4} sm={4} xs={6} key={key} className="mb-3">
+                      <Grid.Col
+                        lg={3}
+                        md={4}
+                        sm={4}
+                        xs={6}
+                        key={key}
+                        className="mb-3"
+                      >
                         <Card shadow="sm" p="lg">
                           <Card.Section>
                             <Image
@@ -102,8 +70,8 @@ const Catalog = () => {
                             {item.price} руб
                           </Text>
                           <Button
-                            variant="light"
-                            color="blue"
+                            variant="gradient"
+                            gradient={{ from: "red", to: "yellow", deg: 150 }}
                             fullWidth
                             style={{ marginTop: 14 }}
                             onClick={() => handleShow(item)}
@@ -117,34 +85,7 @@ const Catalog = () => {
                 </Grid>
               </Grid.Col>
               <Grid.Col md={3}>
-                <FloatingLabel
-                  controlId="floatingInput"
-                  label="Поиск..."
-                  className="mb-3"
-                >
-                  <Form.Control type="text" placeholder="Поиск..." />
-                </FloatingLabel>
-                <Nav className="flex-column footer-menu">
-                  <Nav.Link className="footer-menu__item">
-                    Хозинвентарь
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">
-                    Мебельная фурнитура
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">
-                    Спецпродукция
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">
-                    Кронштейны и крепежные системы
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">
-                    Малые архитектурные формы
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">
-                    Холодная вытяжка деталей
-                  </Nav.Link>
-                  <Nav.Link className="footer-menu__item">Другое</Nav.Link>
-                </Nav>
+                <Input icon={<Search />} placeholder="Поиск..." />
               </Grid.Col>
             </Grid>
           </Container>

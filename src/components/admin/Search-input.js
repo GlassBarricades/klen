@@ -1,13 +1,9 @@
-import { Form } from "react-bootstrap";
+import { Input } from '@mantine/core';
+import { Search } from 'tabler-icons-react';
 
 const SearchInput = ({classes, handler}) => {
     return (
-        <Form.Control
-        className={classes}
-        type="text"
-        placeholder="Поиск..."
-        onChange={handler}
-      />
+      <Input icon={<Search />} placeholder="Поиск..." className={classes} onChange={handler}/>
     )
 }
 export default SearchInput;

@@ -1,5 +1,4 @@
 import AppHeader from "./components/UI/App-header";
-import AppFooter from "./components/UI/App-footer";
 import Home from "./pages/Home";
 import AboutUs from "./pages/About-us";
 import Price from "./pages/Price";
@@ -9,11 +8,11 @@ import MetalWork from "./pages/Metal-work";
 import Coloring from "./pages/Coloring";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
-import { Link } from 'react-router-dom';
+import SideNav from "./components/UI/Side-nav";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
- import "./App.css";
+import "./App.css";
 
 import React, { useState } from "react";
 import {
@@ -21,17 +20,19 @@ import {
   Navbar,
   Header,
   Footer,
-  Text,
   MediaQuery,
   Burger,
   useMantineTheme,
-  Anchor,
-  Container
+  Container,
 } from "@mantine/core";
 
 const App = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
+  const openedHandler = () => {
+    setOpened(false);
+  }
   return (
     <BrowserRouter>
       <AppShell
@@ -53,7 +54,7 @@ const App = () => {
             hidden={!opened}
             width={{ sm: 200, lg: 300 }}
           >
-            <AppHeader responsive={"d-lg-none"} display={"d-flex"} column={"flex-column"}/>
+          <SideNav trigger={openedHandler} />
           </Navbar>
         }
         footer={
@@ -64,10 +65,11 @@ const App = () => {
         header={
           <Header height={70} p="md">
             <Container
-            fluid className="header-wrap"
+              fluid
+              className="header-wrap"
               style={{ display: "flex", height: "100%" }}
             >
-              <AppHeader responsive={"d-lg-flex"} display={"d-none"}/>
+                <AppHeader />
               <MediaQuery largerThan="md" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}

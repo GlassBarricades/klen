@@ -1,0 +1,6 @@
+.header-nav-item {
+    text-transform: uppercase;
+    padding: 0 0.5em;
+    font-weight: 500;
+    color: gray;
+}

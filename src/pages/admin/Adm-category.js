@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { Button, ScrollArea, Table } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
@@ -56,6 +55,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const handleEdit = (category) => {
     setIsEdit(true);
     setTempUuid(category.uuid);
+    setName(category.name);
     handleShow();
   };
   const handleSubmitChange = () => {
@@ -69,81 +69,79 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   };
   const createFormForModal = () => {
     return (
-      <Form id="driver-form" onSubmit={writeToDatabase}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <AppInput
-            type="text"
-            label="Название"
-            placeholder="Название"
-            value={name}
-            handler={(e) => setName(e.target.value)}
-            required
-          />
-        </Form.Group>
-      </Form>
+      <form id="driver-form" onSubmit={writeToDatabase}>
+        <AppInput
+          type="text"
+          label="Название"
+          placeholder="Название"
+          value={name}
+          handler={(e) => setName(e.target.value)}
+          required
+        />
+      </form>
     );
   };
-  return(
-  <>
-    <ModalWriteDb
-      createFormForModal={createFormForModal}
-      show={show}
-      writeToDatabase={writeToDatabase}
-      handleSubmitChange={handleSubmitChange}
-      handleClose={closeReset}
-      handleShow={handleShow}
-      isEdit={isEdit}
-      id={"driver-form"}
-      title={"Добавление Категории"}
-      titleE={"Изменение данных о Категории"}
-    ></ModalWriteDb>
-    <div className="control-wrap">
-    <Button color="blue" onClick={handleShow}>Добавить Категорию</Button>
-    </div>
-    {loading ? (
-      <Loader />
-    ) : (
-      <ScrollArea className="adm-drivers-wrap">
-        <Table
-          className="container mt-3 adm-drivers"
-          bordered
-          hover
-          responsive
-          size="sm"
-        >
-          <thead>
-            <tr>
-              <th>Название</th>
-              <th>Удалить</th>
-              <th>Изменить</th>
-            </tr>
-          </thead>
-          <tbody>
-            {category?.map((category, key) => (
-              <tr key={key}>
-                <td>{category.name}</td>
-                <td>
-                  <Button
-                    onClick={() => handleDelete(category, "category")}
-                    color="orange"
-                  >
-                    Удалить
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    onClick={() => handleEdit(category)}
-                    color="teal"
-                  >
-                    Изменить
-                  </Button>
-                </td>
+  return (
+    <>
+      <ModalWriteDb
+        createFormForModal={createFormForModal}
+        show={show}
+        writeToDatabase={writeToDatabase}
+        handleSubmitChange={handleSubmitChange}
+        handleClose={closeReset}
+        handleShow={handleShow}
+        isEdit={isEdit}
+        id={"driver-form"}
+        title={"Добавление Категории"}
+        titleE={"Изменение данных о Категории"}
+      ></ModalWriteDb>
+      <div className="control-wrap">
+        <Button color="blue" onClick={handleShow}>
+          Добавить Категорию
+        </Button>
+      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <ScrollArea className="adm-drivers-wrap">
+          <Table
+            className="container mt-3 adm-drivers"
+            bordered
+            hover
+            responsive
+            size="sm"
+          >
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Удалить</th>
+                <th>Изменить</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </ScrollArea>
-    )}
-  </>)
+            </thead>
+            <tbody>
+              {category?.map((category, key) => (
+                <tr key={key}>
+                  <td>{category.name}</td>
+                  <td>
+                    <Button
+                      onClick={() => handleDelete(category, "category")}
+                      color="orange"
+                    >
+                      Удалить
+                    </Button>
+                  </td>
+                  <td>
+                    <Button onClick={() => handleEdit(category)} color="teal">
+                      Изменить
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </ScrollArea>
+      )}
+    </>
+  );
 };
 export default AdmCategory;

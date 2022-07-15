@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Grid } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 import AdmProducts from "./admin/Adm-products";
 import AdmNav from "../components/admin/Adm-nav";
@@ -23,18 +23,18 @@ const Admin = () => {
   return (
     <>
       <Container fluid className="admin mt-5 mb-5">
-        <Row className="admin-inner">
-          <Col md={2} className="admin-sidebar">
+        <Grid className="admin-inner">
+          <Grid.Col md={2} className="admin-sidebar">
             <AdmNav />
-          </Col>
-          <Col md={10} className="admin-content">
+          </Grid.Col>
+          <Grid.Col md={10} className="admin-content">
         <Routes>
           <Route path="/adm-products" element={<AdmProducts handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete} />} />
           <Route path="/adm-category" element={<AdmCategory handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete}/>} />
           <Route path="/adm-articles" element={<AdmArticles handleClose={handleClose} handleShow={handleShow} show={show} handleDelete={handleDelete} />} />
         </Routes>
-          </Col>
-        </Row>
+          </Grid.Col>
+        </Grid>
       </Container>
     </>
   );

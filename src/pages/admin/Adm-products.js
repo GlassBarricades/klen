@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { Table, Grid, Button, ScrollArea } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
@@ -14,14 +13,17 @@ import "./Adm-products.css";
 
 const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [name, setName] = useState("");
-  const [subname, setSubname] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [products, setProducts] = useState([]);
   const [productsCategory, setProductsCategory] = useState([]);
+  const [thickness, setThickness] = useState("");
+  const [color, setColor] = useState("");
+  const [coating, setCoating] = useState("");
   const [top, setTop] = useState(false);
   const [news, setNews] = useState(false);
   const [img, setImg] = useState("");
+  const [drawing, setDrawing] = useState("");
   const [descr, setDescr] = useState("");
   const [dimensions, setDimensions] = useState("");
   const [find, setFind] = useState("");
@@ -59,12 +61,15 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
 
   const resetState = () => {
     setName("");
-    setSubname("");
     setCategory("");
     setPrice("");
+    setThickness("");
+    setCoating("");
+    setColor("");
     setTop("");
     setNews("");
     setImg("");
+    setDrawing("");
     setDescr("");
     setDimensions("");
   };
@@ -77,8 +82,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
 
   const filteredProducts = products.filter((product) => {
     return (
-      product.name.toLowerCase().includes(find.toLocaleLowerCase()) +
-      product.subname.toLowerCase().includes(find.toLocaleLowerCase())
+      product.name.toLowerCase().includes(find.toLocaleLowerCase())
     );
   });
 
@@ -87,12 +91,15 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     const uuid = uid();
     set(ref(db, `/products/${uuid}`), {
       name,
-      subname,
       category,
       price,
+      thickness,
+      coating,
+      color,
       top,
       news,
       img,
+      drawing,
       descr,
       dimensions,
       uuid,
@@ -105,12 +112,15 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     setIsEdit(true);
     setTempUuid(product.uuid);
     setName(product.name);
-    setSubname(product.subname);
     setCategory(product.category);
     setPrice(product.price);
+    setThickness(product.thickness);
+    setCoating(product.coating);
+    setColor(product.color);
     setTop(product.top);
     setNews(product.news);
     setImg(product.img);
+    setDrawing(product.drawing);
     setDescr(product.descr);
     setDimensions(product.dimensions);
     handleShow();
@@ -118,12 +128,15 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const handleSubmitChange = () => {
     update(ref(db, `/products/${tempUuid}`), {
       name,
-      subname,
       category,
       price,
+      thickness,
+      coating,
+      color,
       top,
       news,
       img,
+      drawing,
       descr,
       dimensions,
       uuid: tempUuid,
@@ -148,22 +161,13 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
 
   const createFormForModal = () => {
     return (
-      <Form id="driver-form" onSubmit={writeToDatabase}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+      <form id="driver-form" onSubmit={writeToDatabase}>
           <AppInput
             type="text"
             label="Название"
             placeholder="Название"
             value={name}
             handler={(e) => setName(e.target.value)}
-            required
-          />
-          <AppInput
-            type="text"
-            label="Полное название"
-            placeholder="Полное название"
-            value={subname}
-            handler={(e) => setSubname(e.target.value)}
             required
           />
           <AppSelect
@@ -181,7 +185,28 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             handler={(e) => setPrice(e.target.value)}
             required
           />
-          <Form.Check
+          <AppInput
+            type="text"
+            label="Толщина металла"
+            placeholder="Толщина металла"
+            value={thickness}
+            handler={(e) => setThickness(e.target.value)}
+          />
+          <AppInput
+            type="text"
+            label="Покрытие"
+            placeholder="Покрытие"
+            value={coating}
+            handler={(e) => setCoating(e.target.value)}
+          />
+          <AppInput
+            type="text"
+            label="Цвет"
+            placeholder="Цвет"
+            value={color}
+            handler={(e) => setColor(e.target.value)}
+          />
+          {/* <Form.Check
             type="switch"
             id="custom-switch"
             value={top}
@@ -196,14 +221,20 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             label="Новинка"
             onChange={handlerChangeNews}
             checked={news}
-          />
+          /> */}
           <AppInput
             type="text"
             label="Картинка"
             placeholder="Картинка"
             value={img}
             handler={(e) => setImg(e.target.value)}
-            required
+          />
+          <AppInput
+            type="text"
+            label="Чертеж"
+            placeholder="Чертеж"
+            value={drawing}
+            handler={(e) => setDrawing(e.target.value)}
           />
           <AppInput
             type="text"
@@ -211,7 +242,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             placeholder="Описание"
             value={descr}
             handler={(e) => setDescr(e.target.value)}
-            required
             as="textarea"
             rows={3}
           />
@@ -221,10 +251,8 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
             placeholder="Размеры"
             value={dimensions}
             handler={(e) => setDimensions(e.target.value)}
-            required
           />
-        </Form.Group>
-      </Form>
+      </form>
     );
   };
   return (

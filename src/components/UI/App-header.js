@@ -1,15 +1,17 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Container } from '@mantine/core';
-import { Link } from "react-router-dom";
-import LinkContainer from "react-router-bootstrap/LinkContainer";
+import { Image } from "@mantine/core";
+import MainNav from "./Main-nav";
 import "./App-header.css";
 
-const AppHeader = ({column, display}) => {
-  const classez = `${display} d-lg-flex ${column}`;
+const AppHeader = () => {
+  // const classez = `${display} d-lg-flex ${column}`;
   return (
     <>
-        <Navbar.Brand s={Link} to="/">
+      <div className="header-wrap">
+        <Image className="header-logo" src="http://klen-m.by/images/klen-logo.png" alt="Клен" />
+        <MainNav/>
+      </div>
+      {/* <Navbar.Brand s={Link} to="/">
           <img src="http://klen-m.by/images/klen-logo.png" alt="klen" />
         </Navbar.Brand>
           <Nav defaultActiveKey="/" className={classez}>
@@ -65,8 +67,8 @@ const AppHeader = ({column, display}) => {
             <LinkContainer to="/admin">
               <Nav.Link>Админ</Nav.Link>
             </LinkContainer>
-          </Nav>
-          </>
+          </Nav> */}
+    </>
   );
 };
 export default AppHeader;

@@ -1,16 +1,13 @@
-import { FloatingLabel, Form } from "react-bootstrap";
+import { Input, InputWrapper } from "@mantine/core";
 
-const AppInput = ({type, label, placeholder, value, handler, ...attrs}) => {
-    return (
-        <FloatingLabel controlId="floatingInput" label={label} className="mb-3">
-            <Form.Control
-              type={type}
-              value={value}
-              placeholder={placeholder}
-              onChange={handler}
-              {...attrs}
-            />
-          </FloatingLabel>
-    )
-}
+const AppInput = ({ type, label, placeholder, value, handler, ...attrs }) => {
+  return (
+    <InputWrapper
+      label={label}
+      {...attrs}
+    >
+      <Input placeholder={placeholder} onChange={handler} value={value} type={type}/>
+    </InputWrapper>
+  );
+};
 export default AppInput;
