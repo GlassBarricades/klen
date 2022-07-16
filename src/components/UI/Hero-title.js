@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container } from "@mantine/core";
 import "./Hero-title.css";
 
 const HeroTitle = ({text}) => {
