@@ -4,3 +4,6 @@
     font-weight: 500;
     color: gray;
 }
+.drop {
+    display: flex;
+}

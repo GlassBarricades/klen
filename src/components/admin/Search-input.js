@@ -1,9 +1,9 @@
 import { Input } from '@mantine/core';
 import { Search } from 'tabler-icons-react';
 
-const SearchInput = ({classes, handler}) => {
+const SearchInput = ({handler}) => {
     return (
-      <Input icon={<Search />} placeholder="Поиск..." className={classes} onChange={handler}/>
+      <Input mb="md" style={{width: "100%"}} icon={<Search />} placeholder="Поиск..." onChange={handler}/>
     )
 }
 export default SearchInput;

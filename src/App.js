@@ -25,6 +25,7 @@ import {
   useMantineTheme,
   Container,
 } from "@mantine/core";
+import FooterMobile from "./components/UI/Footer-mobile";
 
 const App = () => {
   const theme = useMantineTheme();
@@ -32,7 +33,7 @@ const App = () => {
 
   const openedHandler = () => {
     setOpened(false);
-  }
+  };
   return (
     <BrowserRouter>
       <AppShell
@@ -54,12 +55,12 @@ const App = () => {
             hidden={!opened}
             width={{ sm: 200, lg: 300 }}
           >
-          <SideNav trigger={openedHandler} />
+            <SideNav trigger={openedHandler} />
           </Navbar>
         }
         footer={
           <Footer height={60} p="md">
-            Application footer
+              <FooterMobile />
           </Footer>
         }
         header={
@@ -69,7 +70,7 @@ const App = () => {
               className="header-wrap"
               style={{ display: "flex", height: "100%" }}
             >
-                <AppHeader />
+              <AppHeader />
               <MediaQuery largerThan="md" styles={{ display: "none" }}>
                 <Burger
                   opened={opened}

@@ -3,6 +3,7 @@ import { Anchor, MediaQuery, Menu } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
+import { ChevronDown } from 'tabler-icons-react';
 
 import "./Main-nav.css";
 
@@ -34,7 +35,7 @@ const MainNav = () => {
           Услуги
         </Anchor>
         <Menu
-          control={<Anchor className="header-nav-item">Производство</Anchor>}
+          control={<Anchor className="header-nav-item drop">Производство <ChevronDown /></Anchor>}
         >
           <Menu.Item><Anchor className="header-nav-item" component={Link} to="/catalog">Весь каталог</Anchor></Menu.Item>
           {category.map((item, index) => {

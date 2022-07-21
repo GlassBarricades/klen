@@ -254,7 +254,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
         titleE={"Изменение данных о продукте"}
       ></ModalWriteDb>
       <div className="control-wrap">
-        <Button color="blue" onClick={handleShow}>
+        <Button mb="md" color="blue" onClick={handleShow}>
           Добавить продукт
         </Button>
         <SearchInput

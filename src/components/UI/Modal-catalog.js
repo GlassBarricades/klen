@@ -5,13 +5,12 @@ import "./Modal-catalog.css";
 const ModalCatalog = ({data, show, handleClose}) => {
     return (
         <Modal
-            centered
             size="90%"
             opened={show}
             onClose={handleClose}
           >
             <Grid>
-              <Grid.Col md={6}>
+              <Grid.Col md={4}>
                 <Image
                   height={400}
                   fit="contain"
@@ -19,7 +18,7 @@ const ModalCatalog = ({data, show, handleClose}) => {
                   alt={data.name}
                 />
               </Grid.Col>
-              <Grid.Col md={6}>
+              <Grid.Col md={8}>
                 <h4>{data.name}</h4>
                 <Text className="catalog-item__price">Цена: {data.price} руб</Text>
                 <Group className="catalog-markers">
