@@ -94,7 +94,7 @@ const App = () => {
             <Route path="/metal-work" element={<MetalWork />} />
             <Route path="/coloring" element={<Coloring />} />
             <Route path="/catalog" element={<Catalog />} />
-            <Route path="/admin/*" element={<Admin />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </Container>
       </AppShell>
