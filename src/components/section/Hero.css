@@ -3,11 +3,6 @@
     display: flex;
     align-items: center;
 }
-.form__wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .hero-main {
     display: flex;
     flex-direction: column;

@@ -3,9 +3,11 @@ import { Grid, Button, MediaQuery, Modal } from "@mantine/core";
 
 import "./Footer-mobile.css";
 import ContactPhone from "./Contact-phone";
+import MessageForm from "./Message-form";
 
 const FooterMobile = () => {
     const [opened, setOpened] = useState(false);
+    const [show, setShow] = useState(false);
 
   return (
     <>
@@ -17,10 +19,18 @@ const FooterMobile = () => {
       >
         <ContactPhone />
       </Modal>
+      <Modal
+        opened={show}
+        onClose={() => setShow(false)}
+        title="Сообщение"
+        centered
+      >
+        <MessageForm />
+      </Modal>
     <MediaQuery largerThan="md" styles={{ display: "none" }}>
       <Grid position="center" spacing="xl">
         <Grid.Col span={6}>
-          <Button fullWidth variant="outline" color="orange">
+          <Button fullWidth variant="outline" color="orange" onClick={() => setShow(true)}>
             Написать
           </Button>
         </Grid.Col>

@@ -10,6 +10,7 @@ import {
   Text,
   MediaQuery,
   Stack,
+  Modal,
 } from "@mantine/core";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
@@ -25,6 +26,7 @@ const Catalog = () => {
   const [filter, setFilter] = useState("Весь каталог");
   const [find, setFind] = useState("");
   const [loading, setLoading] = useState(false);
+  const [opened, setOpened] = useState(false);
 
 
   useEffect(() => {
@@ -66,6 +68,7 @@ const Catalog = () => {
     } else {
       setVisibleData(catalog.filter((item) => item.category === filter));
     }
+    setOpened(false);
   };
 
   const buttons = categories.map((item, key) => {
@@ -82,24 +85,11 @@ const Catalog = () => {
     );
   });
 
-  //    function filterCategory(category) {
-  //      const arr = catalog.filter((item) => {
-  //        return item.category === category
-  //     })
-  //     setCatalog(arr);
-  //  }
-
   const handleClose = () => setShow(false);
   const handleShow = (item) => {
     setData(item);
     setShow(true);
   };
-
-  // function searchHandler(dataSearch) {
-  //   dataSearch.filter((item) => {
-  //     return item.name.toLowerCase().includes(find.toLocaleLowerCase());
-  //   });
-  // }
 
   const filteredCatalog = visibleData.filter((item) => {
     return item.name.toLowerCase().includes(find.toLocaleLowerCase());
@@ -111,6 +101,15 @@ const Catalog = () => {
         <Loader />
       ) : (
         <>
+          <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title="Категории"
+          >
+             <Stack>
+             {buttons}  
+            </Stack> 
+          </Modal>
           <ModalCatalog data={data} show={show} handleClose={handleClose} />
           <Container fluid>
             <MediaQuery
@@ -162,9 +161,14 @@ const Catalog = () => {
                 </Grid.Col>
                 <Grid.Col md={3}>
                   <SearchInput handler={(e) => setFind(e.target.value)} />
+                  <MediaQuery largerThan="md" styles={{display: "none"}}>
+                    <Button variant="filled" color="orange" onClick={() => setOpened(true)}>Категории</Button>
+                  </MediaQuery>
+                  <MediaQuery smallerThan="md" styles={{display: "none"}}>
                   <Stack>
                     {buttons}
                   </Stack>
+                  </MediaQuery>
                 </Grid.Col>
               </Grid>
             </MediaQuery>

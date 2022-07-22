@@ -1,9 +1,21 @@
-import { Container, Grid, Button, Input, InputWrapper } from "@mantine/core";
-// import { Container, Row, Col, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Container, Grid, Button, MediaQuery, Modal } from "@mantine/core";
+import ContactForm from "../UI/Contact-form";
 import "./Hero.css";
 
 const Hero = () => {
+  const [opened, setOpened] = useState(false);
+
   return (
+    <>
+      <Modal
+      opened={opened}
+      onClose={() => setOpened(false)}
+      centered
+      title="Заказать обратный звонок"
+      >
+        <ContactForm />
+      </Modal>
       <Container className="hero">
         <Grid>
           <Grid.Col md={6} className="hero-main">
@@ -11,21 +23,20 @@ const Hero = () => {
             <h1 className="hero-title mt-2 mb-5">
               Металлообработка и полимерное окрашивание любой сложности
             </h1>
-            <Button variant="filled" color="orange">Заказать консультацию</Button>
+            <MediaQuery largerThan="md" styles={{ display: "none" }}>
+            <Button variant="filled" color="orange"  onClick={() => setOpened(true)}>
+              Заказать консультацию
+            </Button>
+            </MediaQuery>
           </Grid.Col>
-          <Grid.Col md={6} className="form__wrap">
-              <form style={{maxWidth: "300px"}}>
-                <InputWrapper label="Имя">
-                  <Input variant="default" placeholder="Введите Ваше имя" />
-                </InputWrapper>
-                <InputWrapper mt="md" label="Телефон">
-                  <Input variant="default" placeholder="Введите Ваш номер телефона" />
-                </InputWrapper>
-                <Button mt="md">Заказать звонок</Button>
-              </form>
-          </Grid.Col>
+          <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+            <Grid.Col md={6} className="form__wrap">
+              <ContactForm />
+            </Grid.Col>
+          </MediaQuery>
         </Grid>
       </Container>
+    </>
   );
 };
 export default Hero;
