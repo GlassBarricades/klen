@@ -10,6 +10,7 @@ import Loader from "../../components/admin/Loader";
 import "./Adm-category.css";
 
 const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
+  const [position, setPosition] = useState("");
   const [name, setName] = useState("");
   const [category, setCategory] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -31,6 +32,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   }, []);
 
   const resetState = () => {
+    setPosition("");
     setName("");
   };
 
@@ -45,6 +47,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
     const uuid = uid();
     set(ref(db, `/category/${uuid}`), {
       name,
+      position,
       uuid,
     });
 
@@ -55,21 +58,37 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const handleEdit = (category) => {
     setIsEdit(true);
     setTempUuid(category.uuid);
+    setPosition(category.position)
     setName(category.name);
     handleShow();
   };
   const handleSubmitChange = () => {
     update(ref(db, `/category/${tempUuid}`), {
       name,
+      position,
       uuid: tempUuid,
     });
     resetState();
     handleClose();
     setIsEdit(false);
   };
+
+  const sortCategory = (arr) => {
+    arr.sort((a, b) => (a.position > b.position ? 1 : -1))
+    return arr;
+  }
+
   const createFormForModal = () => {
     return (
       <form id="driver-form" onSubmit={writeToDatabase}>
+        <AppInput
+          type="text"
+          label="Позиция в каталоге"
+          placeholder="Позиция в каталоге"
+          value={position}
+          handler={(e) => setPosition(e.target.value)}
+          required
+        />
         <AppInput
           type="text"
           label="Название"
@@ -106,21 +125,23 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
         <ScrollArea className="adm-drivers-wrap">
           <Table
             className="container mt-3 adm-drivers"
-            bordered
-            hover
-            responsive
+            bordered="true"
+            hover="true"
+            responsive="true"
             size="sm"
           >
             <thead>
               <tr>
+                <th>Позиция</th>
                 <th>Название</th>
                 <th>Удалить</th>
                 <th>Изменить</th>
               </tr>
             </thead>
             <tbody>
-              {category?.map((category, key) => (
+              {sortCategory(category)?.map((category, key) => (
                 <tr key={key}>
+                  <td>{category.position}</td>
                   <td>{category.name}</td>
                   <td>
                     <Button

@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Table, Grid, Button, ScrollArea, Switch } from "@mantine/core";
+import {
+  Table,
+  Grid,
+  Button,
+  ScrollArea,
+  Switch,
+  ColorInput,
+} from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, onValue, update } from "firebase/database";
@@ -123,6 +130,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
     setDimensions(product.dimensions);
     handleShow();
   };
+
   const handleSubmitChange = () => {
     update(ref(db, `/products/${tempUuid}`), {
       name,
@@ -197,15 +205,41 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
           value={coating}
           handler={(e) => setCoating(e.target.value)}
         />
-        <AppInput
+        {/* <AppInput
           type="text"
           label="Цвет"
           placeholder="Цвет"
           value={color}
           handler={(e) => setColor(e.target.value)}
+        /> */}
+        <ColorInput
+          mt="sm"
+          format="hex"
+          label="Цвет"
+          value={color}
+          onChange={setColor}
+          swatches={[
+            "#ffffff",
+            "#000000",
+            "#a69292"
+          ]}
         />
-        <Switch label="Товар месяца" color="orange" value={top} onChange={handlerChangeTop} checked={top}/>
-        <Switch label="Новинка" color="orange" value={news} onChange={handlerChangeNews} checked={news}/>
+        <Switch
+          mt="sm"
+          label="Товар месяца"
+          color="orange"
+          value={top}
+          onChange={handlerChangeTop}
+          checked={top}
+        />
+        <Switch
+          mt="sm"
+          label="Новинка"
+          color="orange"
+          value={news}
+          onChange={handlerChangeNews}
+          checked={news}
+        />
         <AppInput
           type="text"
           label="Картинка"

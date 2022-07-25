@@ -17,7 +17,7 @@ const MainNav = () => {
           Услуги
         </Anchor>
         <Anchor className="header-nav-item" component={Link} to="/catalog">
-          Производство
+          Продукция
         </Anchor>
         <Anchor className="header-nav-item" component={Link} to="/price">
           Прайсы

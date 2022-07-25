@@ -1,4 +1,4 @@
-import { Input, InputWrapper, Button } from "@mantine/core";
+import { Input, InputWrapper, Textarea, Button } from "@mantine/core";
 
 import "./Contact-form.css";
 
@@ -11,6 +11,7 @@ const ContactForm = () => {
       <InputWrapper mt="md" label="Телефон">
         <Input variant="default" placeholder="Введите Ваш номер телефона" />
       </InputWrapper>
+      <Textarea mt="md" placeholder="Ваше сообщение" label="Сообщение" required />
       <Button mt="md" variant="filled" color="orange">Заказать звонок</Button>
     </form>
   );

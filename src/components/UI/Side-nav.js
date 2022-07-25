@@ -16,7 +16,7 @@ const SideNav = ({status, trigger}) => {
         Услуги
         </Anchor>
         <Anchor className="side-nav-item" component={Link} to="/catalog" onClick={trigger}>
-        Производство
+        Продукция
         </Anchor>
         <Anchor className="side-nav-item" component={Link} to="/price" onClick={trigger}>
         Прайсы

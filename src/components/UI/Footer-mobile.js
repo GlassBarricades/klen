@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Grid, Button, MediaQuery, Modal } from "@mantine/core";
 
 import "./Footer-mobile.css";
+import ContactForm from "./Contact-form";
 import ContactPhone from "./Contact-phone";
-import MessageForm from "./Message-form";
 
 const FooterMobile = () => {
     const [opened, setOpened] = useState(false);
@@ -25,13 +25,13 @@ const FooterMobile = () => {
         title="Сообщение"
         centered
       >
-        <MessageForm />
+        <ContactForm />
       </Modal>
     <MediaQuery largerThan="md" styles={{ display: "none" }}>
       <Grid position="center" spacing="xl">
         <Grid.Col span={6}>
           <Button fullWidth variant="outline" color="orange" onClick={() => setShow(true)}>
-            Написать
+            Заказать звонок
           </Button>
         </Grid.Col>
         <Grid.Col span={6}>
