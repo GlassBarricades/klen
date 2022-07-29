@@ -11,6 +11,7 @@ import {
   MediaQuery,
   Stack,
   Modal,
+  Paper
 } from "@mantine/core";
 import Loader from "../components/admin/Loader";
 import "./Catalog.css";
@@ -113,7 +114,7 @@ const Catalog = () => {
             <Stack>{buttons}</Stack>
           </Modal>
           <ModalCatalog data={data} show={show} handleClose={handleClose} />
-          <Container fluid>
+          <Container mt="xl" fluid>
             <MediaQuery
               smallerThan="md"
               styles={{ flexDirection: "column-reverse" }}
@@ -136,11 +137,11 @@ const Catalog = () => {
                               <Image
                                 fit="contain"
                                 src={item.img}
-                                height={200}
+                                height={130}
                                 alt="Norway"
                               />
                             </Card.Section>
-                            <Text size="lg" align="center" weight={500} v="lg">
+                            <Text size="md" align="center" weight={500} v="lg">
                               {item.name}
                             </Text>
                             <Text align="center" weight={500}>
@@ -173,7 +174,9 @@ const Catalog = () => {
                     </Button>
                   </MediaQuery>
                   <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+                    <Paper shadow="sm" radius="md" p="xl">
                     <Stack>{buttons}</Stack>
+                    </Paper>
                   </MediaQuery>
                 </Grid.Col>
               </Grid>

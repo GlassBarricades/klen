@@ -1,14 +1,28 @@
-import { Input, Textarea, Button } from "@mantine/core";
+import { TextInput, Textarea, Button } from "@mantine/core";
 
 import "./Contact-form.css";
 
 const ContactForm = () => {
   return (
     <form style={{ maxWidth: "300px" }}>
-        <Input variant="default" placeholder="Введите Ваше имя" />
-        <Input variant="default" placeholder="Введите Ваш номер телефона" />
-      <Textarea mt="md" placeholder="Ваше сообщение" label="Сообщение" required />
-      <Button mt="md" variant="filled" color="orange">Заказать звонок</Button>
+      <TextInput
+        mt="sm"
+        label="Имя"
+        variant="default"
+        placeholder="Ваше имя"
+        required
+      />
+      <TextInput
+        mt="sm"
+        label="Телефон"
+        variant="default"
+        placeholder="Ваш номер телефона"
+        required
+      />
+      <Textarea mt="sm" placeholder="Ваше сообщение" label="Сообщение" />
+      <Button mt="md" variant="filled" color="orange">
+        Заказать звонок
+      </Button>
     </form>
   );
 };

@@ -48,6 +48,7 @@ const App = () => {
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
         fixed
+        padding="0"
         navbar={
           <Navbar
             p="md"
@@ -59,9 +60,11 @@ const App = () => {
           </Navbar>
         }
         footer={
-          <Footer height={60} p="md">
+          <MediaQuery largerThan="md" styles={{ display: "none" }}>
+            <Footer height={60} p="md">
               <FooterMobile />
-          </Footer>
+            </Footer>
+          </MediaQuery>
         }
         header={
           <Header height={70} p="md">
@@ -84,7 +87,7 @@ const App = () => {
           </Header>
         }
       >
-        <Container fluid>
+        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
@@ -96,7 +99,7 @@ const App = () => {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
-        </Container>
+        </div>
       </AppShell>
     </BrowserRouter>
   );

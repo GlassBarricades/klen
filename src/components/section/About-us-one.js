@@ -1,7 +1,23 @@
-import { Container, Grid } from "@mantine/core";
+import { Container, Grid, Image, createStyles, Title } from "@mantine/core";
 import "./About-us-one.css";
 
 const AboutUsOne = ({ revers = false, text, image }) => {
+  const useStyles = createStyles((theme) => ({
+    title: {
+      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+      fontWeight: 900,
+      marginBottom: theme.spacing.md,
+      textAlign: 'center',
+  
+      [theme.fn.smallerThan('sm')]: {
+        fontSize: 28,
+        textAlign: 'left',
+      },
+    }
+  }))
+
+  const {classes} = useStyles();
+
   let stl;
   if (revers) {
     stl = "about-us-one reverse-row";
@@ -9,12 +25,11 @@ const AboutUsOne = ({ revers = false, text, image }) => {
     stl = "about-us-one";
   }
   return (
-    <Container className="mt-3 mb-3">
+    <Container mt="md" mb="md">
+      <Title className={classes.title}>Заголовок</Title>
       <Grid className={stl}>
         <Grid.Col md={6} className="about-us-one-img__wrap">
-          <div className="about-us-one-img">
-            <img src={image} width="100%" alt="123" />
-          </div>
+            <Image src={image}/>
         </Grid.Col>
         <Grid.Col md={6} className="about-us-one-text__wrap">
           <div>
