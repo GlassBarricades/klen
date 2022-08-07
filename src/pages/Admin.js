@@ -29,6 +29,7 @@ const Admin = () => {
         <Grid className="admin-inner">
           <Grid.Col md={12} className="admin-content">
             <Tabs
+              mt="md"
               variant="outline"
               value={activeTab}
               onTabChange={setActiveTab}
