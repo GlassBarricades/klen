@@ -1,15 +1,27 @@
 import { useState } from "react";
-import { Container, Grid, Tabs } from "@mantine/core";
+import { Container, Grid, Tabs, createStyles } from "@mantine/core";
 import AdmProducts from "./admin/Adm-products";
 import AdmCategory from "./admin/Adm-category";
 import { db } from "../firebase";
 import { ref, remove } from "firebase/database";
 
-import "./Admin.css";
+const useStyles = createStyles((theme) => ({
+  admin: {
+    minHeight: '60vh'
+  },
+  adminInner: {
+    height: '100%'
+  },
+  adminContent: {
+    height: '100%'
+  }
+}))
 
 const Admin = () => {
   const [showProduct, setShowProduct] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
+
+  const { classes } = useStyles();
 
 
   const handleClosePoduct = () => setShowProduct(false);
@@ -25,9 +37,9 @@ const Admin = () => {
 
   return (
     <>
-      <Container fluid className="admin mt-5 mb-5">
-        <Grid className="admin-inner">
-          <Grid.Col md={12} className="admin-content">
+      <Container fluid className={classes.admin}>
+        <Grid className={classes.adminInner}>
+          <Grid.Col md={12} className={classes.adminContent}>
             <Tabs
               mt="md"
               variant="outline"

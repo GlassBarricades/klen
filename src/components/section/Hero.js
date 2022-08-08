@@ -15,7 +15,6 @@ const useStyles = createStyles((theme) => ({
       paddingBottom: 50,
     },
   },
-
   inner: {
     position: 'relative',
     zIndex: 1,

@@ -1,34 +1,39 @@
-import { Anchor, MediaQuery } from "@mantine/core";
+import { Anchor, MediaQuery, createStyles } from "@mantine/core";
 import { Link } from "react-router-dom";
 
-import "./Main-nav.css";
+const useStyles = createStyles((theme) => ({
+  headerNavItem: {
+    textTransform: 'uppercase',
+    padding: '0 0.5em',
+    fontWeight: '500',
+    color: 'rgb(68, 61, 61)'
+  }
+}))
 
 const MainNav = () => {
+  const { classes } = useStyles();
   return (
     <MediaQuery smallerThan="md" styles={{ display: "none" }}>
-      <nav className="header-nav">
-        <Anchor className="header-nav-item" component={Link} to="/">
+      <nav>
+        <Anchor className={classes.headerNavItem} component={Link} to="/">
           Главная
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/about-us">
+        <Anchor className={classes.headerNavItem} component={Link} to="/about-us">
           О нас
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/service">
+        <Anchor className={classes.headerNavItem} component={Link} to="/service">
           Услуги
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/catalog">
+        <Anchor className={classes.headerNavItem} component={Link} to="/catalog">
           Продукция
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/price">
+        <Anchor className={classes.headerNavItem} component={Link} to="/price">
           Прайсы
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/blog">
-          Блог
-        </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/contacts">
+        <Anchor className={classes.headerNavItem} component={Link} to="/contacts">
           Контакты
         </Anchor>
-        <Anchor className="header-nav-item" component={Link} to="/admin">
+        <Anchor className={classes.headerNavItem} component={Link} to="/admin">
           Админ
         </Anchor>
       </nav>

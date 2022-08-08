@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Grid, Button, MediaQuery, Modal } from "@mantine/core";
-
-import "./Footer-mobile.css";
 import ContactForm from "./Contact-form";
 import ContactPhone from "./Contact-phone";
 

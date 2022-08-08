@@ -1,6 +1,5 @@
 import AboutUsOne from "../components/section/About-us-one";
 import HeroTitle from "../components/UI/Hero-title";
-import "./About-us.css";
 
 const AboutUs = () => {
     return (

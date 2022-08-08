@@ -1,5 +1,4 @@
 import Hero from "../components/section/Hero";
-import "./Home.css";
 import FeatureGrid from "../components/section/Feature";
 import Partners from "../components/section/Partners";
 import AboutUsOne from "../components/section/About-us-one";

@@ -1,13 +1,25 @@
 import { useState } from "react";
-import { Anchor, Image, MediaQuery, Button, Modal } from "@mantine/core";
+import { Anchor, Image, MediaQuery, Button, Modal, createStyles } from "@mantine/core";
 import MainNav from "./Main-nav";
 import { Link } from "react-router-dom";
 import ContactForm from "./Contact-form";
 
-import "./App-header.css";
+const useStyles = createStyles((theme) => ({
+  headerWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    maxWidth: '1400px',
+    width: '100%',
+    justifyContent: 'space-between',
+    margin: '0 auto'
+  }
+}));
+
 
 const AppHeader = () => {
   const [opened, setOpened] = useState(false);
+
+  const { classes } = useStyles();
 
   return (
     <>
@@ -19,8 +31,8 @@ const AppHeader = () => {
       >
         <ContactForm />
       </Modal>
-      <div className="header-wrap">
-        <Anchor component={Link} to="/"><Image className="header-logo" src="https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/klen-logo.png?alt=media&token=e8ed398c-1e98-4418-8f8e-f182e6ce6b88" alt="Клен" /></Anchor>
+      <div className={classes.headerWrap}>
+        <Anchor component={Link} to="/"><Image src="https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/klen-logo.png?alt=media&token=e8ed398c-1e98-4418-8f8e-f182e6ce6b88" alt="Клен" /></Anchor>
         <MainNav/>
         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
             <Button mr="md" variant="filled" color="orange"  onClick={() => setOpened(true)}>

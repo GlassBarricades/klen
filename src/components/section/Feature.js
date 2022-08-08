@@ -9,7 +9,7 @@ import {
     Button,
     Center
   } from '@mantine/core';
-  import { IconGauge, IconCash, IconUser, IconMessage2, IconLock, TablerIcon } from '@tabler/icons';
+  import { IconGauge, IconCash, IconUser, IconMessage2, IconLock } from '@tabler/icons';
   
   export const MOCKDATA = [
     {

@@ -1,5 +1,4 @@
 import { Stack, Grid, Group, Button, Text } from "@mantine/core";
-import "./Contact-phone.css";
 
 const ContactPhone = () => {
   return (

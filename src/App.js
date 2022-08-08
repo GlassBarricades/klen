@@ -2,10 +2,7 @@ import AppHeader from "./components/UI/App-header";
 import Home from "./pages/Home";
 import AboutUs from "./pages/About-us";
 import Price from "./pages/Price";
-import Blog from "./pages/Blog";
 import Contacts from "./pages/Contacts";
-import MetalWork from "./pages/Metal-work";
-import Coloring from "./pages/Coloring";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
 import SideNav from "./components/UI/Side-nav";
@@ -92,10 +89,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/price" element={<Price />} />
-            <Route path="/blog" element={<Blog />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/metal-work" element={<MetalWork />} />
-            <Route path="/coloring" element={<Coloring />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>

@@ -11,12 +11,12 @@ import {
   MediaQuery,
   Stack,
   Modal,
-  Paper
+  Paper,
 } from "@mantine/core";
 import Loader from "../components/admin/Loader";
-import "./Catalog.css";
 import ModalCatalog from "../components/UI/Modal-catalog";
 import SearchInput from "../components/admin/Search-input";
+
 
 const Catalog = () => {
   const [catalog, setCatalog] = useState([]);

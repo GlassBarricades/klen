@@ -1,6 +1,5 @@
 import { TextInput, Textarea, Button } from "@mantine/core";
 
-import "./Contact-form.css";
 
 const ContactForm = () => {
   return (
