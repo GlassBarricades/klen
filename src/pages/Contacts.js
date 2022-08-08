@@ -1,52 +1,65 @@
-import HeroTitle from "../components/UI/Hero-title";
-import { Container, Grid, List } from "@mantine/core";
+import { Container, Grid } from "@mantine/core";
+import ContactCard from "../components/UI/Contact-card";
 import "./Contacts.css";
 
 const Contacts = () => {
-    return (
-        <>
-            <HeroTitle text={"Контакты"} />
-            <Container>
-                <Grid className="mt-5 mb-5">
-                    <Grid.Col md={4}>
-                        <List className="contacts-list">
-                            <List.Item><h5>Отдел продаж:</h5></List.Item>
-                            <List.Item>Тел. (+375-17) 542 03 20</List.Item>
-                            <List.Item>GSM (+375-29) 372 18 85</List.Item>
-                            <List.Item>E-mail: info@klen-m.by</List.Item>
-                        </List>
-                    </Grid.Col>
-                    <Grid.Col md={4}>
-                        <List className="contacts-list">
-                            <List.Item><h5>Директор: Чесноков Алексей Леонидович</h5></List.Item>
-                            <List.Item>Тел. (+375-17) 542 03 25</List.Item>
-                            <List.Item>GSM (+375-29) 677 26 48</List.Item>
-                            <List.Item>E-mail: klen_minsk@mail.ru</List.Item>
-                        </List>
-                    </Grid.Col>
-                    <Grid.Col md={4}>
-                        <List className="contacts-list">
-                            <List.Item><h5>Главный бухгалтер: Акунец Александр Владимирович</h5></List.Item>
-                            <List.Item>Тел (+375-17) 542 03 25</List.Item>
-                            <List.Item>GSM (+375-29) 136 38 12</List.Item>
-                            <List.Item>E-mail: buhklen@mail.ru</List.Item>
-                        </List>
-                    </Grid.Col>
-                </Grid>
-                <Grid className="mb-5">
-                    <Grid.Col md={6} className="contacts-map__wrap">
-                        <div className="map">
-
-                        </div>
-                    </Grid.Col>
-                    <Grid.Col md={6} className="contacts-text__wrap">
-                        <div>
-                            <p className="contacts-text">Общество с дополнительной ответственностью «Производственно-строительный комплекс Клён» ( ОДО «ПСК Клён» ) Свидетельство № 600050314, выдано 13.09.2012г. Минским райисполкомом 223053 Минская обл., Минский р-н, Боровлянский с/с, 65-1а, район д. Малиновка, Республика Беларусь. Телефон (017) 542-03-20, 542-03-25Р/сч: BY79BPSB30121736180139330000 в ОАО "БПС-Сбербанк" Дополнительный офис № 709, г. Минск, пр-кт Дзержинского 119 код BPSBBY2X, УНН 600050314 ОКПО 28589187</p>
-                        </div>
-                    </Grid.Col>
-                </Grid>
-            </Container>
-        </>
-    )
-}
+  return (
+    <>
+      <Container>
+        <Grid mt="md" mb="md">
+          <Grid.Col md={4}>
+            <ContactCard
+              title={"Отдел продаж"}
+              name={"Кулаковский Егор"}
+              phoneMobile={"+375293721885"}
+              phoneCity={"+375175420320"}
+              mail={"info@klen-m.by"}
+              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+            />
+          </Grid.Col>
+          <Grid.Col md={4}>
+            <ContactCard
+              title={"Директор"}
+              name={"Чесноков Алексей"}
+              phoneMobile={"+375296772648"}
+              phoneCity={"+375175420325"}
+              mail={"klen_minsk@mail.ru"}
+              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+            />
+          </Grid.Col>
+          <Grid.Col md={4}>
+            <ContactCard
+              title={"Бухгалтер"}
+              name={"Акунец Александр"}
+              phoneMobile={"+375291363812"}
+              phoneCity={"+375175420325"}
+              mail={"buhklen@mail.ru"}
+              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+            />
+          </Grid.Col>
+        </Grid>
+        <Grid>
+          <Grid.Col md={6} className="contacts-map__wrap">
+            <div className="map"></div>
+          </Grid.Col>
+          <Grid.Col md={6} className="contacts-text__wrap">
+            <div>
+              <p className="contacts-text">
+                Общество с дополнительной ответственностью
+                «Производственно-строительный комплекс Клён» ( ОДО «ПСК Клён» )
+                Свидетельство № 600050314, выдано 13.09.2012г. Минским
+                райисполкомом 223053 Минская обл., Минский р-н, Боровлянский
+                с/с, 65-1а, район д. Малиновка, Республика Беларусь.
+                Телефон (017) 542-03-20, 542-03-25Р/сч:
+                BY79BPSB30121736180139330000 в ОАО "БПС-Сбербанк" Дополнительный
+                офис № 709, г. Минск, пр-кт Дзержинского 119 код BPSBBY2X, УНН
+                600050314 ОКПО 28589187
+              </p>
+            </div>
+          </Grid.Col>
+        </Grid>
+      </Container>
+    </>
+  );
+};
 export default Contacts;
