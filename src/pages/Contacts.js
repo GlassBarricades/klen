@@ -1,8 +1,18 @@
-import { Container, Grid } from "@mantine/core";
+import { Container, Grid, Paper, createStyles } from "@mantine/core";
 import ContactCard from "../components/UI/Contact-card";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./Contacts.css";
 
+const useStyles = createStyles((theme) => ({
+  mapWrap: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+}))
+
 const Contacts = () => {
+  const { classes } = useStyles();
   return (
     <>
       <Container>
@@ -14,7 +24,9 @@ const Contacts = () => {
               phoneMobile={"+375293721885"}
               phoneCity={"+375175420320"}
               mail={"info@klen-m.by"}
-              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+              avatar={
+                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
+              }
             />
           </Grid.Col>
           <Grid.Col md={4}>
@@ -24,7 +36,9 @@ const Contacts = () => {
               phoneMobile={"+375296772648"}
               phoneCity={"+375175420325"}
               mail={"klen_minsk@mail.ru"}
-              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+              avatar={
+                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
+              }
             />
           </Grid.Col>
           <Grid.Col md={4}>
@@ -34,13 +48,23 @@ const Contacts = () => {
               phoneMobile={"+375291363812"}
               phoneCity={"+375175420325"}
               mail={"buhklen@mail.ru"}
-              avatar={"https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"}
+              avatar={
+                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
+              }
             />
           </Grid.Col>
         </Grid>
         <Grid>
-          <Grid.Col md={6} className="contacts-map__wrap">
-            <div className="map"></div>
+          <Grid.Col md={6} >
+              <Paper shadow="md" p="lg" className={classes.mapWrap}>
+              <YMaps>
+                <div>
+                  <Map width={400} defaultState={{ center: [54.000342, 27.627346], zoom: 11 }}>
+                  <Placemark geometry={[54.000342, 27.627346]} />
+                  </Map>
+                </div>
+              </YMaps>
+              </Paper>
           </Grid.Col>
           <Grid.Col md={6} className="contacts-text__wrap">
             <div>
