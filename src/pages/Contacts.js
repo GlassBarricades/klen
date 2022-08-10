@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, createStyles } from "@mantine/core";
+import { Container, Grid, Paper, Title, createStyles } from "@mantine/core";
 import ContactCard from "../components/UI/Contact-card";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./Contacts.css";
@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 }))
 
 const Contacts = () => {
@@ -16,6 +16,7 @@ const Contacts = () => {
   return (
     <>
       <Container>
+        <Title mb="md" mt="md" order={1} align="center">Контакты</Title>
         <Grid mt="md" mb="md">
           <Grid.Col md={4}>
             <ContactCard
@@ -54,19 +55,18 @@ const Contacts = () => {
             />
           </Grid.Col>
         </Grid>
+        <Title order={1} mb='md' mt='md' align="center">Карта проезда</Title>
         <Grid>
-          <Grid.Col md={6} >
+          <Grid.Col md={12} >
               <Paper shadow="md" p="lg" className={classes.mapWrap}>
-              <YMaps>
-                <div>
-                  <Map width={400} defaultState={{ center: [54.000342, 27.627346], zoom: 11 }}>
+              <YMaps style={{width: "100%"}}>
+                  <Map width='100%' defaultState={{ center: [54.000342, 27.627346], zoom: 11 }}>
                   <Placemark geometry={[54.000342, 27.627346]} />
                   </Map>
-                </div>
               </YMaps>
               </Paper>
           </Grid.Col>
-          <Grid.Col md={6} className="contacts-text__wrap">
+          <Grid.Col md={12} className="contacts-text__wrap">
             <div>
               <p className="contacts-text">
                 Общество с дополнительной ответственностью
