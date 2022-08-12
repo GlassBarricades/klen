@@ -1,5 +1,6 @@
 import { Container, Grid, Paper, Title, createStyles } from "@mantine/core";
 import ContactCard from "../components/UI/Contact-card";
+import ContactBlock from "../components/section/Contact-block";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./Contacts.css";
 
@@ -17,6 +18,7 @@ const Contacts = () => {
     <>
       <Container>
         <Title mb="md" mt="md" order={1} align="center">Контакты</Title>
+        <ContactBlock />
         <Grid mt="md" mb="md">
           <Grid.Col md={4}>
             <ContactCard
