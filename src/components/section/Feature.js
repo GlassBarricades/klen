@@ -1,15 +1,14 @@
 import {
     ThemeIcon,
     Text,
-    Title,
     Container,
     SimpleGrid,
     useMantineTheme,
     createStyles,
-    Button,
     Center
   } from '@mantine/core';
   import { IconGauge, IconCash, IconUser, IconMessage2, IconLock } from '@tabler/icons';
+  import TitleDescr from '../UI/Title-descr';
   
   export const MOCKDATA = [
     {
@@ -64,27 +63,6 @@ import {
       paddingTop: theme.spacing.xl * 4,
       paddingBottom: theme.spacing.xl * 4,
     },
-  
-    title: {
-      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-      fontWeight: 900,
-      marginBottom: theme.spacing.md,
-      textAlign: 'center',
-  
-      [theme.fn.smallerThan('sm')]: {
-        fontSize: 28,
-        textAlign: 'left',
-      },
-    },
-  
-    description: {
-      textAlign: 'center',
-      fontSize: '1.1em',
-  
-      [theme.fn.smallerThan('sm')]: {
-        textAlign: 'left',
-      },
-    },
   }));
   
   const FeaturesGrid = ({ title, description, data = MOCKDATA }) => {
@@ -93,14 +71,7 @@ import {
   
     return (
       <Container className={classes.wrapper}>
-        <Title className={classes.title}>{title}</Title>
-  
-        <Container size={560} p={0}>
-          <Text size="sm" className={classes.description}>
-            {description}
-          </Text>
-        </Container>
-  
+        <TitleDescr title={title} text={description} />
         <SimpleGrid
           mt={60}
           cols={3}
@@ -113,7 +84,7 @@ import {
           {features}
         </SimpleGrid>
         <Center>
-        <Button mt="xl" size="lg" color="orange">Подробнее о компании</Button>
+        {/* <Button mt="xl" size="lg" color="orange">Подробнее о компании</Button> */}
         </Center>
       </Container>
     );

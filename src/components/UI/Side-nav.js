@@ -35,6 +35,9 @@ const SideNav = ({status, trigger}) => {
         <Anchor className={classes.sideNavItem} component={Link} to="/catalog" onClick={trigger}>
         Продукция
         </Anchor>
+        <Anchor className={classes.sideNavItem} component={Link} to="/exclusive" onClick={trigger}>
+        Эксклюзив
+        </Anchor>
         <Anchor className={classes.sideNavItem} component={Link} to="/price" onClick={trigger}>
         Прайсы
         </Anchor>

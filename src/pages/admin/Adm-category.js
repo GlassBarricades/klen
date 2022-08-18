@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
-import { Button, ScrollArea, Table } from "@mantine/core";
+import { Button, ScrollArea, Table, TextInput, createStyles } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, onValue, update } from "firebase/database";
 import ModalWriteDb from "../../components/admin/Modal-write-db";
-import AppInput from "../../components/admin/App-input";
 import Loader from "../../components/admin/Loader";
 
-import "./Adm-category.css";
+const useStyles = createStyles((theme) => ({
+  tableWrap: {
+    height: "65vh"
+  },
+  controlWrap: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+}));
 
 const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const [position, setPosition] = useState("");
@@ -16,6 +25,8 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [tempUuid, setTempUuid] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { classes } = useStyles();
 
   useEffect(() => {
     setLoading(true);
@@ -81,25 +92,24 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const createFormForModal = () => {
     return (
       <form id="driver-form" onSubmit={writeToDatabase}>
-        <AppInput
-          type="text"
+        <TextInput
           label="Позиция в каталоге"
           placeholder="Позиция в каталоге"
           value={position}
-          handler={(e) => setPosition(e.target.value)}
+          onChange={(e) => setPosition(e.target.value)}
           required
         />
-        <AppInput
-          type="text"
+        <TextInput
           label="Название"
           placeholder="Название"
           value={name}
-          handler={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           required
         />
       </form>
     );
   };
+
   return (
     <>
       <ModalWriteDb
@@ -114,7 +124,7 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
         title={"Добавление Категории"}
         titleE={"Изменение данных о Категории"}
       ></ModalWriteDb>
-      <div className="control-wrap">
+      <div className={classes.controlWrap}>
         <Button color="blue" onClick={handleShow}>
           Добавить Категорию
         </Button>
@@ -122,9 +132,9 @@ const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
       {loading ? (
         <Loader />
       ) : (
-        <ScrollArea className="adm-drivers-wrap">
+        <ScrollArea>
           <Table
-            className="container mt-3 adm-drivers"
+            className={classes.tableWrap}
             bordered="true"
             hover="true"
             responsive="true"

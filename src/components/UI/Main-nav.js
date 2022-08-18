@@ -27,6 +27,9 @@ const MainNav = () => {
         <Anchor className={classes.headerNavItem} component={Link} to="/catalog">
           Продукция
         </Anchor>
+        <Anchor className={classes.headerNavItem} component={Link} to="/exclusive">
+          Эксклюзив
+        </Anchor>
         <Anchor className={classes.headerNavItem} component={Link} to="/price">
           Прайсы
         </Anchor>
