@@ -1,26 +1,11 @@
 import { Carousel } from "@mantine/carousel";
-import { Image, Container, Title, createStyles } from "@mantine/core";
+import { Image, Container } from "@mantine/core";
+import TitleDescr from "../UI/Title-descr";
 
 const Partners = () => {
-  const useStyles = createStyles((theme) => ({
-    title: {
-      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-      fontWeight: 900,
-      marginBottom: theme.spacing.md,
-      textAlign: 'center',
-  
-      [theme.fn.smallerThan('sm')]: {
-        fontSize: 28,
-        textAlign: 'left',
-      },
-    },
-  }))
-
-  const { classes } = useStyles();
-
   return (
     <Container mt="xl" mb="xl" fluid>
-      <Title className={classes.title}>Наши партнеры</Title>
+      <TitleDescr title={"Наши партнеры"} />
       <Carousel
         mx="auto"
         align="start"

@@ -5,6 +5,7 @@ import Price from "./pages/Price";
 import Contacts from "./pages/Contacts";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
+import Exclusive from "./pages/Exclusive";
 import SideNav from "./components/UI/Side-nav";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -92,6 +93,7 @@ const App = () => {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/exclusive" element={<Exclusive />} />
           </Routes>
         </div>
       </AppShell>

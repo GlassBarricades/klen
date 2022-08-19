@@ -6,17 +6,32 @@ import {
   ScrollArea,
   Switch,
   ColorInput,
+  TextInput,
+  Select,
+  createStyles,
+  Textarea,
 } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, onValue, update } from "firebase/database";
 import ModalWriteDb from "../../components/admin/Modal-write-db";
-import AppInput from "../../components/admin/App-input";
-import AppSelect from "../../components/admin/App-select";
 import SearchInput from "../../components/admin/Search-input";
 import LoaderSpinner from "../../components/admin/Loader";
 
-import "./Adm-products.css";
+const useStyles = createStyles((theme) => ({
+  tableWrap: {
+    height: "65vh"
+  },
+  controlWrap: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  findInput: {
+    maxWidth: "25rem"
+  }
+}));
 
 const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [name, setName] = useState("");
@@ -37,6 +52,8 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [tempUuid, setTempUuid] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { classes } = useStyles();
 
   useEffect(() => {
     setLoading(true);
@@ -168,108 +185,96 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const createFormForModal = () => {
     return (
       <form id="driver-form" onSubmit={writeToDatabase}>
-        <AppInput
-          type="text"
-          label="Название"
-          placeholder="Название"
-          value={name}
-          handler={(e) => setName(e.target.value)}
-          required
-        />
-        <AppSelect
-          label="Категории"
-          value={category}
-          handler={(e) => setCategory(e.target.value)}
-          options={createCategories}
-          required
-        />
-        <AppInput
-          type="text"
-          label="Цена"
-          placeholder="Цена"
-          value={price}
-          handler={(e) => setPrice(e.target.value)}
-          required
-        />
-        <AppInput
-          type="text"
-          label="Толщина металла"
-          placeholder="Толщина металла"
-          value={thickness}
-          handler={(e) => setThickness(e.target.value)}
-        />
-        <AppInput
-          type="text"
-          label="Покрытие"
-          placeholder="Покрытие"
-          value={coating}
-          handler={(e) => setCoating(e.target.value)}
-        />
-        {/* <AppInput
-          type="text"
-          label="Цвет"
-          placeholder="Цвет"
-          value={color}
-          handler={(e) => setColor(e.target.value)}
-        /> */}
-        <ColorInput
-          mt="sm"
-          format="hex"
-          label="Цвет"
-          value={color}
-          onChange={setColor}
-          swatches={[
-            "#ffffff",
-            "#000000",
-            "#a69292"
-          ]}
-        />
-        <Switch
-          mt="sm"
-          label="Товар месяца"
-          color="orange"
-          value={top}
-          onChange={handlerChangeTop}
-          checked={top}
-        />
-        <Switch
-          mt="sm"
-          label="Новинка"
-          color="orange"
-          value={news}
-          onChange={handlerChangeNews}
-          checked={news}
-        />
-        <AppInput
-          type="text"
-          label="Картинка"
-          placeholder="Картинка"
-          value={img}
-          handler={(e) => setImg(e.target.value)}
-        />
-        <AppInput
-          type="text"
-          label="Чертеж"
-          placeholder="Чертеж"
-          value={drawing}
-          handler={(e) => setDrawing(e.target.value)}
-        />
-        <AppInput
-          type="text"
-          label="Описание"
-          placeholder="Описание"
-          value={descr}
-          handler={(e) => setDescr(e.target.value)}
-          as="textarea"
-          rows={3}
-        />
-        <AppInput
-          type="text"
-          label="Размеры"
-          placeholder="Размеры"
-          value={dimensions}
-          handler={(e) => setDimensions(e.target.value)}
-        />
+        <Grid>
+          <Grid.Col md={6}>
+            <TextInput
+              label="Название"
+              placeholder="Название"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <Select
+              label="Категории"
+              placeholder="Категории"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              data={createCategories}
+              required
+            />
+            <TextInput
+              label="Цена"
+              placeholder="Цена"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+            <TextInput
+              label="Толщина металла"
+              placeholder="Толщина металла"
+              value={thickness}
+              onChange={(e) => setThickness(e.target.value)}
+            />
+            <TextInput
+              label="Покрытие"
+              placeholder="Покрытие"
+              value={coating}
+              onChange={(e) => setCoating(e.target.value)}
+            />
+            <ColorInput
+              format="hex"
+              label="Цвет"
+              value={color}
+              onChange={setColor}
+              swatches={["#ffffff", "#000000", "#a69292"]}
+            />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Switch
+              mt="lg"
+              label="Товар месяца"
+              color="orange"
+              value={top}
+              onChange={handlerChangeTop}
+              checked={top}
+            />
+            <Switch
+              mt="sm"
+              label="Новинка"
+              color="orange"
+              value={news}
+              onChange={handlerChangeNews}
+              checked={news}
+            />
+            <TextInput
+              mt="lg"
+              label="Картинка"
+              placeholder="Картинка"
+              value={img}
+              onChange={(e) => setImg(e.target.value)}
+            />
+            <TextInput
+              label="Чертеж"
+              placeholder="Чертеж"
+              value={drawing}
+              onChange={(e) => setDrawing(e.target.value)}
+            />
+            <Textarea
+              label="Описание"
+              placeholder="Описание"
+              value={descr}
+              onChange={(e) => setDescr(e.target.value)}
+              as="textarea"
+              rows={3}
+            />
+            <TextInput
+              label="Размеры"
+              placeholder="Размеры"
+              value={dimensions}
+              onChange={(e) => setDimensions(e.target.value)}
+            />
+          </Grid.Col>
+        </Grid>
       </form>
     );
   };
@@ -286,20 +291,21 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
         id={"driver-form"}
         title={"Добавление продукта"}
         titleE={"Изменение данных о продукте"}
+        size={"xl"}
       ></ModalWriteDb>
-      <div className="control-wrap">
+      <div className={classes.controlWrap}>
         <Button mb="md" color="blue" onClick={handleShow}>
           Добавить продукт
         </Button>
         <SearchInput
-          classes="mt-3 find-input"
+          classes={classes.findInput}
           handler={(e) => setFind(e.target.value)}
         />
       </div>
       {loading ? (
         <LoaderSpinner />
       ) : (
-        <ScrollArea className="table-wrap">
+        <ScrollArea className={classes.tableWrap}>
           <Table verticalSpacing="sm" highlightOnHover>
             <thead>
               <tr>

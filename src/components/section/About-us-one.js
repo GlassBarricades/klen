@@ -2,22 +2,11 @@ import {
   Container,
   Grid,
   Image,
-  createStyles,
-  Title,
+  createStyles
 } from "@mantine/core";
+import TitleDescr from "../UI/Title-descr";
 
 const useStyles = createStyles((theme) => ({
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900,
-    marginBottom: theme.spacing.md,
-    textAlign: "center",
-
-    [theme.fn.smallerThan("sm")]: {
-      fontSize: 28,
-      textAlign: "left",
-    },
-  },
   aboutUsOneImgWrap: {
     padding: "2rem",
     display: "flex",
@@ -51,7 +40,7 @@ const AboutUsOne = ({ revers = false, text, image }) => {
   }
   return (
     <Container mt="md" mb="md">
-      <Title className={classes.title}>Заголовок</Title>
+      <TitleDescr title={"Холодная штамповка"} />
       <Grid className={stl}>
         <Grid.Col md={6} className={classes.aboutUsOneImgWrap}>
           <Image src={image} />
