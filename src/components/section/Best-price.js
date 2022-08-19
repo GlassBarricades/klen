@@ -6,7 +6,6 @@ import {
   Paper,
   Text,
   Title,
-  Button,
   Image,
   useMantineTheme,
   Container,
@@ -77,8 +76,9 @@ function BestPrice() {
       if (data !== null) {
         Object.values(data).map((product) => {
           if (product.top) {
-            return setCatalog((oldArray) => [...oldArray, product]);
+            setCatalog((oldArray) => [...oldArray, product]);
           }
+          return data;
         });
       }
     });

@@ -1,4 +1,5 @@
 import { Title, Text, Container, Button, Overlay, createStyles } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -109,7 +110,7 @@ const Hero = () => {
           {/* <Button className={classes.control} variant="white" size="lg">
             О компании
           </Button> */}
-          <Button variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }} className={cx(classes.control, classes.secondaryControl)} size="lg">
+          <Button component={Link} to="/catalog" variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }} className={cx(classes.control, classes.secondaryControl)} size="lg">
             Каталог продукции
           </Button>
         </div>
