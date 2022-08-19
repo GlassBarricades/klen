@@ -13,7 +13,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
   descr: {
-    textAlign: 'center',
     fontSize: '1.1em',
 
     [theme.fn.smallerThan('sm')]: {
@@ -22,13 +21,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const TitleDescr = ({ title, text }) => {
+const TitleDescr = ({ title, text, descrAlign="center" }) => {
   const { classes } = useStyles();
   return (
     <>
       <Title className={classes.title} align="center">{title}</Title>
       <Container size={560} p={0}>
-      <Text size="sm" className={classes.descr} align="center">{text}</Text>
+      <Text align={descrAlign} size="sm" className={classes.descr}>{text}</Text>
       </Container>
     </>
   );

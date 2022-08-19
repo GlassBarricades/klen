@@ -39,7 +39,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   highlight: {
-    color: theme.colors[theme.primaryColor][4],
+    color: "#dc2b19",
   },
 
   description: {

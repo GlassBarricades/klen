@@ -22,11 +22,19 @@ import {
   Burger,
   useMantineTheme,
   Container,
+  createStyles
 } from "@mantine/core";
 import FooterMobile from "./components/UI/Footer-mobile";
 
+const useStyles = createStyles((theme) => ({
+  header: {
+    position: 'static'
+  }
+}))
+
 const App = () => {
   const theme = useMantineTheme();
+  const { classes } = useStyles();
   const [opened, setOpened] = useState(false);
 
   const openedHandler = () => {
@@ -41,11 +49,11 @@ const App = () => {
               theme.colorScheme === "dark"
                 ? theme.colors.dark[8]
                 : theme.colors.gray[0],
+            paddingTop: 0
           },
         }}
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        fixed
         padding="0"
         navbar={
           <Navbar
@@ -65,7 +73,7 @@ const App = () => {
           </MediaQuery>
         }
         header={
-          <Header height={70} p="md">
+          <Header fixed={false} height={70} p="md" className={classes.header}>
             <Container
               fluid
               className="header-wrap"

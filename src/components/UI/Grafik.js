@@ -1,17 +1,19 @@
-import { Stack, Text, Group } from "@mantine/core";
+import { Stack, Text, Group, MediaQuery } from "@mantine/core";
 import { IconClock } from "@tabler/icons";
 
 const Grafik = () => {
-    return (
-        <>
-            <Group>
-            <IconClock color="orange" size={31} />
-            <Stack spacing={0}>
-                <Text>График работы:</Text>
-                <Text>Пн-Пт: 7:00-18:00</Text>
-            </Stack>
-            </Group>
-        </>
-    )
-}
-export default Grafik
+  return (
+    <>
+      <MediaQuery smallerThan="lg" styles={{ display: "none" }}>
+        <Group>
+          <IconClock color="orange" size={31} />
+          <Stack spacing={0}>
+            <Text>График работы:</Text>
+            <Text>Пн-Пт: 9:00-17:00</Text>
+          </Stack>
+        </Group>
+      </MediaQuery>
+    </>
+  );
+};
+export default Grafik;
