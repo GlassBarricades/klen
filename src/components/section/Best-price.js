@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 import { Carousel } from "@mantine/carousel";
-import { useMediaQuery } from "@mantine/hooks";
 import {
   createStyles,
   Paper,
   Text,
   Title,
   Image,
-  useMantineTheme,
   Container,
 } from "@mantine/core";
 import TitleDescr from "../UI/Title-descr";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
+import Loader from "../admin/Loader";
 
 const useStyles = createStyles((theme) => ({
   card: {
-    height: 380,
+    height: 350,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -30,7 +29,7 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1.2,
     fontSize: 22,
     marginTop: theme.spacing.xs,
-    textAlign: "center"
+    textAlign: "center",
   },
 
   price: {
@@ -39,75 +38,66 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     fontSize: 20,
     textTransform: "uppercase",
-    textAlign: "center"
+    textAlign: "center",
   },
 }));
 
-function Card({ img, name, price }) {
+const BestPrice = () => {
+  const [catalog, setCatalog] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { classes } = useStyles();
 
-  return (
-    <Paper
-      shadow="md"
-      p="xl"
-      radius="md"
-      className={classes.card}
-    >
-      <div>
-        <Image fit="contain" height={230} src={img}/>
-        <Text className={classes.price} size="xs">
-          {price} руб
-        </Text>
-        <Title order={3} className={classes.title}>
-          {name}
-        </Title>
-      </div>
-    </Paper>
-  );
-}
-
-function BestPrice() {
-  const [catalog, setCatalog] = useState([]);
-
   useEffect(() => {
+    setLoading(true);
     onValue(ref(db, `/products/`), (snapshot) => {
       setCatalog([]);
       const data = snapshot.val();
       if (data !== null) {
-        Object.values(data).map((product) => {
-          if (product.top) {
-            setCatalog((oldArray) => [...oldArray, product]);
-          }
-          return data;
+        Object.values(data).filter((product) => {
+            if (product.news) {
+              return setCatalog((oldArray) => [...oldArray, product]);
+            }
+            return data
         });
+        setLoading(false);
       }
     });
   }, []);
 
-  console.log(catalog);
-
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-  const slides = catalog.map((item) => (
-    <Carousel.Slide key={item.name}>
-      <Card {...item} />
-    </Carousel.Slide>
-  ));
-
   return (
-    <Container fluid>
-        <TitleDescr title={"Лучшая цена"} />
+    <>
+    {loading ? (<Loader />) : (
+      <Container mt="xl" mb="xl" fluid>
+      <TitleDescr title={"Новинки"} />
       <Carousel
-      dragFree
-        slideSize="20%"
-        breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 2 }]}
-        slideGap="xl"
+        mx="auto"
         align="start"
-        slidesToScroll={mobile ? 1 : 2}
+        slideGap="md"
+        slideSize="20%"
+        breakpoints={[
+          { maxWidth: "md", slideSize: "50%" },
+          { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
+        ]}
       >
-        {slides}
+        {catalog.map((item) => {
+          return (
+            <Carousel.Slide key={item.name}>
+              <Paper shadow="md" p="xl" radius="md" className={classes.card}>
+                  <Image fit="contain" height={210} src={item.img} />
+                  <Text className={classes.price} size="xs">
+                    {item.price} руб
+                  </Text>
+                  <Title order={3} className={classes.title}>
+                    {item.name}
+                  </Title>
+              </Paper>
+            </Carousel.Slide>
+          )
+        })}
       </Carousel>
     </Container>
+    )}
+    </>
   );
 }
 export default BestPrice;

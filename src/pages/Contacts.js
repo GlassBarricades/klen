@@ -1,24 +1,70 @@
-import { Container, Grid, Paper, Title, createStyles } from "@mantine/core";
+import { Container, Grid, Title } from "@mantine/core";
 import ContactCard from "../components/UI/Contact-card";
-import ContactBlock from "../components/section/Contact-block";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import ContactSection from "../components/section/Contact-section";
+import { IconMapPin, IconPhone, IconMail, IconClock } from "@tabler/icons";
 import "./Contacts.css";
 
-const useStyles = createStyles((theme) => ({
-  mapWrap: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}))
-
 const Contacts = () => {
-  const { classes } = useStyles();
+  const contactData = [
+    {
+      title: "Адрес:",
+      text: "211501, Витебская обл., г. Новополоцк, ул. Молодежная, д. 166",
+      icon: <IconMapPin color="orange" size={31} />,
+      links: []
+    },
+    {
+      title: "Телефон:",
+      text: "",
+      icon: <IconPhone color="orange" size={31} />,
+      links: [{name: "+375291111111", type: "tel", link: "+375291111111", descr: "склад"}, {name: "+375291111111", type: "tel", link: "+375291111111", descr: "производство"}]
+    },
+    {
+      title: "Электронная почта:",
+      text: "",
+      icon: <IconMail color="orange" size={31} />,
+      links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
+    },
+    {
+      title: "График работы:",
+      text: "Пн-Пт: 9:00-17:00",
+      icon: <IconClock color="orange" size={31} />,
+      links: []
+    }
+  ];
+  const contactData2 = [
+    {
+      title: "Адрес:",
+      text: "222053, Минская обл., Минский р-н, Боровлянский с/c, д. 65-1А, р-н д. Малиновка",
+      icon: <IconMapPin color="orange" size={31} />,
+      links: []
+    },
+    {
+      title: "Телефон:",
+      text: "",
+      icon: <IconPhone color="orange" size={31} />,
+      links: [{name: "+375292222222", type: "tel", link: "+375292222222"}, {name: "+375292222222", type: "tel", link: "+375292222222"}]
+    },
+    {
+      title: "Электронная почта:",
+      text: "",
+      icon: <IconMail color="orange" size={31} />,
+      links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
+    },
+    {
+      title: "График работы:",
+      text: "Пн-Пт: 9:00-17:00",
+      icon: <IconClock color="orange" size={31} />,
+      links: []
+    }
+  ];
   return (
     <>
       <Container>
-        <Title mb="md" mt="md" order={1} align="center">Контакты</Title>
-        <ContactBlock />
+        <Title mb="md" mt="md" order={1} align="center">
+          Контакты
+        </Title>
+        <ContactSection data={contactData} title={"Производство и склад"}/>
+        <ContactSection data={contactData2} title={"Офис"}/>
         <Grid mt="md" mb="md">
           <Grid.Col md={4}>
             <ContactCard
@@ -57,17 +103,7 @@ const Contacts = () => {
             />
           </Grid.Col>
         </Grid>
-        <Title order={1} mb='md' mt='md' align="center">Карта проезда</Title>
         <Grid>
-          <Grid.Col md={12} >
-              <Paper shadow="md" p="lg" className={classes.mapWrap}>
-              <YMaps style={{width: "100%"}}>
-                  <Map width='100%' defaultState={{ center: [54.000342, 27.627346], zoom: 11 }}>
-                  <Placemark geometry={[54.000342, 27.627346]} />
-                  </Map>
-              </YMaps>
-              </Paper>
-          </Grid.Col>
           <Grid.Col md={12} className="contacts-text__wrap">
             <div>
               <p className="contacts-text">
