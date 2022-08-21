@@ -179,7 +179,10 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   };
 
   const createCategories = productsCategory.map((item) => {
-    return item.name;
+    const token = {value: "", label: ""};
+    token.value = item.name;
+    token.label = item.name;
+    return token;
   });
 
   const createFormForModal = () => {
@@ -198,7 +201,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
               label="Категории"
               placeholder="Категории"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={setCategory}
               data={createCategories}
               required
             />

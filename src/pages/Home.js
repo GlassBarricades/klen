@@ -2,6 +2,7 @@ import Hero from "../components/section/Hero";
 import FeatureGrid from "../components/section/Feature";
 import Partners from "../components/section/Partners";
 import BestPrice from "../components/section/Best-price";
+import AppFooter from "../components/UI/App-footer";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         descrAlign={"left"}
       />
       <Partners />
+      <AppFooter />
     </>
   );
 };
