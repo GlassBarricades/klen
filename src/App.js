@@ -7,12 +7,13 @@ import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
 import Exclusive from "./pages/Exclusive";
 import SideNav from "./components/UI/Side-nav";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { db } from "./firebase";
+import { ref, onValue } from "firebase/database";
 
 import "./App.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppShell,
   Navbar,
@@ -35,7 +36,34 @@ const useStyles = createStyles((theme) => ({
 const App = () => {
   const theme = useMantineTheme();
   const { classes } = useStyles();
+  
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    onValue(ref(db, `/products/`), (snapshot) => {
+      setProducts([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((product) =>
+          setProducts((oldArray) => [...oldArray, product])
+        );
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    onValue(ref(db, `/category/`), (snapshot) => {
+      setCategories([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((category) =>
+          setCategories((oldArray) => [...oldArray, category])
+        );
+      }
+    });
+  }, []);
 
   const openedHandler = () => {
     setOpened(false);
@@ -97,7 +125,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/price" element={<Price />} />
+            <Route path="/price" element={<Price data={products} category={categories}/>} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin" element={<Admin />} />

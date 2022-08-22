@@ -144,9 +144,9 @@ const Catalog = () => {
                             <Text size="md" align="center" weight={500} v="lg">
                               {item.name}
                             </Text>
-                            <Text align="center" weight={500}>
+                            {/* <Text align="center" weight={500}>
                               {item.price} руб
-                            </Text>
+                            </Text> */}
                             <Button
                               variant="gradient"
                               gradient={{ from: "red", to: "yellow", deg: 150 }}
