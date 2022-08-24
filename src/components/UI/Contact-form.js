@@ -19,7 +19,7 @@ const ContactForm = () => {
         required
       />
       <Textarea mt="sm" placeholder="Ваше сообщение" label="Сообщение" />
-      <Button mt="md" variant="filled" color="orange">
+      <Button mt="md" variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}>
         Заказать звонок
       </Button>
     </form>

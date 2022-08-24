@@ -18,7 +18,6 @@ const PriceTable = ({ data, filter }) => {
         const el = filterDataCatalog(data, category);
         const rows = el.map((item, i) => (
           <tr key={item.name}>
-            <td>{item.uuid}</td>
             <td>{item.name}</td>
             <td>{item.price} руб</td>
           </tr>
@@ -30,7 +29,6 @@ const PriceTable = ({ data, filter }) => {
       <Table>
         <thead>
           <tr>
-            <th>Номер</th>
             <th>Название</th>
             <th>Цена \ руб</th>
           </tr>

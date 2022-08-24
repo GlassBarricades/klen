@@ -77,7 +77,8 @@ const App = () => {
               theme.colorScheme === "dark"
                 ? theme.colors.dark[8]
                 : theme.colors.gray[0],
-            paddingTop: 0
+            paddingTop: 0,
+            paddingBottom: 0
           },
         }}
         navbarOffsetBreakpoint="sm"

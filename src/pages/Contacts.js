@@ -9,25 +9,25 @@ const Contacts = () => {
     {
       title: "Адрес:",
       text: "211501, Витебская обл., г. Новополоцк, ул. Молодежная, д. 166",
-      icon: <IconMapPin color="orange" size={31} />,
+      icon: <IconMapPin color="royalblue" size={31} />,
       links: []
     },
     {
       title: "Телефон:",
       text: "",
-      icon: <IconPhone color="orange" size={31} />,
-      links: [{name: "+375291111111", type: "tel", link: "+375291111111", descr: "склад"}, {name: "+375291111111", type: "tel", link: "+375291111111", descr: "производство"}]
+      icon: <IconPhone color="royalblue" size={31} />,
+      links: [{name: "+375293721885", type: "tel", link: "+375293721885"}, {name: "+375175420320", type: "tel", link: "+375175420320" }]
     },
     {
       title: "Электронная почта:",
       text: "",
-      icon: <IconMail color="orange" size={31} />,
+      icon: <IconMail color="royalblue" size={31} />,
       links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
     },
     {
       title: "График работы:",
       text: "Пн-Пт: 9:00-17:00",
-      icon: <IconClock color="orange" size={31} />,
+      icon: <IconClock color="royalblue" size={31} />,
       links: []
     }
   ];
@@ -35,25 +35,25 @@ const Contacts = () => {
     {
       title: "Адрес:",
       text: "222053, Минская обл., Минский р-н, Боровлянский с/c, д. 65-1А, р-н д. Малиновка",
-      icon: <IconMapPin color="orange" size={31} />,
+      icon: <IconMapPin color="royalblue" size={31} />,
       links: []
     },
     {
       title: "Телефон:",
       text: "",
-      icon: <IconPhone color="orange" size={31} />,
-      links: [{name: "+375292222222", type: "tel", link: "+375292222222"}, {name: "+375292222222", type: "tel", link: "+375292222222"}]
+      icon: <IconPhone color="royalblue" size={31} />,
+      links: [{name: "+375293721885", type: "tel", link: "+375293721885"}, {name: "+375175420320", type: "tel", link: "+375175420320" }]
     },
     {
       title: "Электронная почта:",
       text: "",
-      icon: <IconMail color="orange" size={31} />,
+      icon: <IconMail color="royalblue" size={31} />,
       links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
     },
     {
       title: "График работы:",
       text: "Пн-Пт: 9:00-17:00",
-      icon: <IconClock color="orange" size={31} />,
+      icon: <IconClock color="royalblue" size={31} />,
       links: []
     }
   ];
@@ -63,8 +63,8 @@ const Contacts = () => {
         <Title mb="md" mt="md" order={1} align="center">
           Контакты
         </Title>
-        <ContactSection data={contactData} title={"Производство и склад"}/>
         <ContactSection data={contactData2} title={"Офис"}/>
+        <ContactSection data={contactData} title={"Производство"}/>
         <Grid mt="md" mb="md">
           <Grid.Col md={4}>
             <ContactCard

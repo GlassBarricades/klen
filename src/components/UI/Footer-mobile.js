@@ -28,12 +28,12 @@ const FooterMobile = () => {
     <MediaQuery largerThan="md" styles={{ display: "none" }}>
       <Grid position="center" spacing="xl">
         <Grid.Col span={6}>
-          <Button fullWidth variant="outline" color="orange" onClick={() => setShow(true)}>
+          <Button fullWidth variant="outline" сolor="royalblue" onClick={() => setShow(true)}>
             Заказать звонок
           </Button>
         </Grid.Col>
         <Grid.Col span={6}>
-          <Button fullWidth variant="filled" color="orange" onClick={() => setOpened(true)}>
+          <Button fullWidth variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }} onClick={() => setOpened(true)}>
             Позвонить
           </Button>
         </Grid.Col>

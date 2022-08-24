@@ -1,96 +1,114 @@
-import "./App-footer.css";
-import { Grid, Container, Image, Text, createStyles, Title, Stack } from "@mantine/core";
+import {
+  Grid,
+  Container,
+  Image,
+  Text,
+  createStyles,
+  Title,
+  Stack,
+  Anchor
+} from "@mantine/core";
+import { IconMapPin, IconMail, IconClock } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
-  footer: {
-    position: 'static'
+  wrapper: {
+    width: "100%",
+    background:
+      "linear-gradient(90deg, rgba(228,228,242,1) 0%, rgba(234,234,245,1) 35%, rgba(229,237,238,1) 100%)",
+    padding: "2em 0",
+  },
+  footerText: {
+    textAlign: 'left'
+  },
+  socialIWrap: {
+    marginTop: "10px",
+    display: 'flex',
+    maxWidth: '100px',
+    minWidth: '100px',
+    justifyContent: 'space-between'
+  },
+  socialIItem: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%",
+    backgroundColor: "royalblue"
   }
-}))
+}));
 
 const AppFooter = () => {
   const { classes } = useStyles();
   return (
-        <Container>
-          <Grid>
-          <Grid.Col md={4} >
-            <Image fit="contain" height={60} width={60} src="http://klen-m.by/images/klen-logo.png" />
-             <Text className="footer-text">
-               Основу успеха компании составляют инновационность используемых
-               технологий, сплоченный дух и профессионализм нашей команды,
-               крепкие партнерские отношения и гибкость стратегий развития!
-             </Text>
-             <div className="social-i__wrap">
-               <div className="social-i__item"></div>
-               <div className="social-i__item"></div>
-               <div className="social-i__item"></div>
-             </div>
-           </Grid.Col>
-           <Grid.Col md={4}>
-            <Title align="center">Контакты</Title>
+    <div className={classes.wrapper}>
+      <Container>
+        <Grid className={classes.footer}>
+          <Grid.Col md={4}>
+            <Image
+              fit="contain"
+              height={60}
+              width={60}
+              src="http://klen-m.by/images/klen-logo.png"
+            />
+            <Text className={classes.footerText}>
+              Основу успеха компании составляют инновационность используемых
+              технологий, сплоченный дух и профессионализм нашей команды,
+              крепкие партнерские отношения и гибкость стратегий развития!
+            </Text>
+            <div className={classes.socialIWrap}>
+              <div className={classes.socialIItem}></div>
+              <div className={classes.socialIItem}></div>
+              <div className={classes.socialIItem}></div>
+            </div>
+          </Grid.Col>
+          <Grid.Col md={4}>
+            <Title>Контакты</Title>
             <Stack>
-
+              <Stack spacing={1}>
+                <Text>Отдел продаж:</Text>
+                <Anchor href='tel:+375293721885'>+375293721885</Anchor>
+                <Anchor href='tel:+375175420320'>+375175420320</Anchor>
+                <Anchor href='mailto:info@klen-m.by'>info@klen-m.by</Anchor>
+              </Stack>
+              <Stack spacing={1}>
+                <Text>Директор:</Text>
+                <Anchor href='tel:+375296772648'>+375296772648</Anchor>
+                <Anchor href='tel:+375175420325'>+375175420325</Anchor>
+                <Anchor href='mailto:klen_minsk@mail.ru'>klen_minsk@mail.ru</Anchor>
+              </Stack>
             </Stack>
-           </Grid.Col>
-           <Grid.Col md={4}>
-            <Title align="center">Адреса</Title>
-            <Stack>
-
+          </Grid.Col>
+          <Grid.Col md={4}>
+            <Title>Адрес</Title>
+            <Stack spacing="sm">
+              <Grid>
+                <Grid.Col md={2}><IconMapPin color="royalblue" size={31} /></Grid.Col>
+                <Grid.Col md={10}>
+                  <Stack spacing={2}>
+                    <Title order={3}>Офис:</Title>
+                    <Text>222053, Минская обл., Минский р-н, Боровлянский с/c, д. 65-1А, р-н д. Малиновка</Text>
+                  </Stack>
+                </Grid.Col>
+              </Grid>
+              <Grid>
+                <Grid.Col md={2}><IconClock color="royalblue" size={31} /></Grid.Col>
+                <Grid.Col md={10}>
+                  <Stack spacing={2}>
+                    <Text>Пн-Пт: 9:00-17:00</Text>
+                  </Stack>
+                </Grid.Col>
+              </Grid>
+              <Grid>
+                <Grid.Col md={2}><IconMail color="royalblue" size={31} /></Grid.Col>
+                <Grid.Col md={10}>
+                  <Stack spacing={2}>
+                  <Anchor href='mailto:info@klen-m.by'>info@klen-m.by</Anchor>
+                  </Stack>
+                </Grid.Col>
+              </Grid>
             </Stack>
-           </Grid.Col>
-          </Grid>
-        </Container>
-    // <Navbar bg="light" expand="lg">
-    //   <Container className="mt-3 mb-3">
-    //     <Row className="footer-wrap">
-    //       <Col md={4} xs={12} className="footer-text__wrap">
-    //         <Navbar.Brand as={Link} to="/">
-    //           <img src="http://klen-m.by/images/klen-logo.png" alt="klen" />
-    //         </Navbar.Brand>
-    //         <p className="footer-text">
-    //           Основу успеха компании составляют инновационность используемых
-    //           технологий, сплоченный дух и профессионализм нашей команды,
-    //           крепкие партнерские отношения и гибкость стратегий развития!
-    //         </p>
-    //         <div className="social-i__wrap">
-    //           <Instagram className="mr-4" color="red" size={26} />
-    //           <Facebook className="mr-4" color="red" size={26} />
-    //           <Whatsapp className="mr-4" color="red" size={26} />
-    //         </div>
-    //       </Col>
-    //       <Col>
-    //         <h5 className="footer-menu__title">Каталог</h5>
-    //         <Nav className="flex-column footer-menu">
-    //           <Nav.Link className="footer-menu__item">Хозинвентарь</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Мебельная фурнитура</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Спецпродукция</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Кронштейны и крепежные системы</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Малые архитектурные формы</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Холодная вытяжка деталей</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Другое</Nav.Link>
-    //         </Nav>
-    //       </Col>
-    //       <Col>
-    //         <h5 className="footer-menu__title">Услуги</h5>
-    //         <Nav className="flex-column footer-menu">
-    //           <Nav.Link className="footer-menu__item">Металлообработка</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Полимерное окрашивание</Nav.Link>
-    //         </Nav>
-    //       </Col>
-    //       <Col>
-    //         <h5 className="footer-menu__title">Новости</h5>
-    //         <Nav className="flex-column footer-menu">
-    //           <Nav.Link className="footer-menu__item">Статьи</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">О компании</Nav.Link>
-    //           <Nav.Link className="footer-menu__item">Контакты</Nav.Link>
-    //         </Nav>
-    //       </Col>
-    //     </Row>
-    //     <Row>
-    //       <Col></Col>
-    //       <Col></Col>
-    //     </Row>
-    //   </Container>
-    // </Navbar>
+          </Grid.Col>
+        </Grid>
+      </Container>
+    </div>
   );
 };
 export default AppFooter;

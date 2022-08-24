@@ -36,9 +36,6 @@ const MainNav = () => {
         <Anchor className={classes.headerNavItem} component={Link} to="/contacts">
           Контакты
         </Anchor>
-        <Anchor className={classes.headerNavItem} component={Link} to="/admin">
-          Админ
-        </Anchor>
       </nav>
     </MediaQuery>
   );

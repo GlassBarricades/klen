@@ -3,7 +3,6 @@ import { Carousel } from "@mantine/carousel";
 import {
   createStyles,
   Paper,
-  Text,
   Title,
   Image,
   Container,
@@ -30,16 +29,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: 22,
     marginTop: theme.spacing.xs,
     textAlign: "center",
-  },
-
-  price: {
-    color: theme.black,
-    opacity: 0.7,
-    fontWeight: 700,
-    fontSize: 20,
-    textTransform: "uppercase",
-    textAlign: "center",
-  },
+  }
 }));
 
 const BestPrice = () => {
@@ -84,9 +74,6 @@ const BestPrice = () => {
             <Carousel.Slide key={item.name}>
               <Paper shadow="md" p="xl" radius="md" className={classes.card}>
                   <Image fit="contain" height={210} src={item.img} />
-                  <Text className={classes.price} size="xs">
-                    {item.price} руб
-                  </Text>
                   <Title order={3} className={classes.title}>
                     {item.name}
                   </Title>

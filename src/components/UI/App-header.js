@@ -11,7 +11,7 @@ import MainNav from "./Main-nav";
 import { Link } from "react-router-dom";
 import ContactForm from "./Contact-form";
 import Grafik from "./Grafik";
-import PhoneHeader from "./Phone-header";
+import HeaderCallBtn from "./Header-call-btn";
 
 const useStyles = createStyles((theme) => ({
   headerWrap: {
@@ -46,13 +46,14 @@ const AppHeader = () => {
             alt="Клен"
           />
         </Anchor>
-          <Grafik />      
-          <PhoneHeader />
+        <Grafik />
         <MainNav />
+        <HeaderCallBtn />
         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
           <Button
             mr="md"
-            variant="filled"
+            variant="gradient"
+            gradient={{ from: "blue", to: "royalblue" }}
             color="orange"
             onClick={() => setOpened(true)}
           >

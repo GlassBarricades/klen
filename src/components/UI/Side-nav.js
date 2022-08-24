@@ -44,9 +44,6 @@ const SideNav = ({status, trigger}) => {
         <Anchor className={classes.sideNavItem} component={Link} to="/contacts" onClick={trigger}>
         Контакты
         </Anchor>
-        <Anchor className={classes.sideNavItem} component={Link} to="/admin" onClick={trigger}>
-        Админ
-        </Anchor>
       </nav>
     )
 }

@@ -148,8 +148,7 @@ const Catalog = () => {
                               {item.price} руб
                             </Text> */}
                             <Button
-                              variant="gradient"
-                              gradient={{ from: "red", to: "yellow", deg: 150 }}
+                              variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}
                               fullWidth
                               style={{ marginTop: 14 }}
                               onClick={() => handleShow(item)}

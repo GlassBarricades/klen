@@ -7,7 +7,7 @@ const ContactPhone = () => {
         <Grid.Col span={12}>
           <Group position="center">
             <Text>+375(29)372-18-85</Text>
-            <Button component="a" href="tel:+375293721885" variant="outline" color="orange">
+            <Button component="a" href="tel:+375293721885" variant="outline" color="royalblue">
               Позвонить
             </Button>
           </Group>
@@ -15,7 +15,7 @@ const ContactPhone = () => {
         <Grid.Col span={12}>
           <Group position="center">
             <Text>+375(17)542-03-20</Text>
-            <Button component="a" href="tel:+375175420320" variant="outline" color="orange">
+            <Button component="a" href="tel:+375175420320" variant="outline" color="royalblue">
               Позвонить
             </Button>
           </Group>
@@ -23,7 +23,7 @@ const ContactPhone = () => {
         <Grid.Col span={12}>
           <Group position="center">
             <Text>+375(17)542-03-25</Text>
-            <Button component="a" href="tel:+375175420325" variant="outline" color="orange">
+            <Button component="a" href="tel:+375175420325" variant="outline" color="royalblue">
               Позвонить
             </Button>
           </Group>
