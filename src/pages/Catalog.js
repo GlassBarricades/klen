@@ -165,8 +165,7 @@ const Catalog = () => {
                   <SearchInput handler={(e) => setFind(e.target.value)} />
                   <MediaQuery largerThan="md" styles={{ display: "none" }}>
                     <Button
-                      variant="filled"
-                      color="orange"
+                      variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}
                       onClick={() => setOpened(true)}
                     >
                       Категории

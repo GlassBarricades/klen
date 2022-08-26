@@ -15,11 +15,13 @@ const Price = ({ data, category }) => {
         Прайс-Лист
       </Title>
       <Accordion defaultValue="Кронштейны и крепежные системы">
-
-      <Accordion.Item value="Кронштейны и крепежные системы">
+        <Accordion.Item value="Кронштейны и крепежные системы">
           <Accordion.Control>Кронштейны и крепежные системы</Accordion.Control>
           <Accordion.Panel>
-          <PriceTable data={price} filter={"Кронштейны и крепежные системы"} />
+            <PriceTable
+              data={price}
+              filter={"Кронштейны и крепежные системы"}
+            />
           </Accordion.Panel>
         </Accordion.Item>
 

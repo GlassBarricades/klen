@@ -26,6 +26,9 @@ import {
   createStyles
 } from "@mantine/core";
 import FooterMobile from "./components/UI/Footer-mobile";
+import Service from "./pages/Service";
+import MetalWork from "./components/UI/Service/Metalwork";
+import Coloring from "./components/UI/Service/Coloring";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -131,6 +134,9 @@ const App = () => {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/exclusive" element={<Exclusive />} />
+            <Route path="/service" element={<Service />} />
+            <Route path="/metalwork" element={<MetalWork />} />
+            <Route path="/coloring" element={<Coloring />} />
           </Routes>
         </div>
       </AppShell>
