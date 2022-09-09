@@ -9,7 +9,7 @@ const useStyles = createStyles((theme) => ({
 const ImgText = ({ title, img, text }) => {
     const { classes } = useStyles();
     return (
-        <Grid>
+        <Grid align="center">
             <Grid.Col md={6}>
                 <Image src={img} height={300} />
             </Grid.Col>

@@ -25,7 +25,7 @@ const TitleDescr = ({ title, text, descrAlign="center" }) => {
   const { classes } = useStyles();
   return (
     <>
-      <Title className={classes.title} align="center">{title}</Title>
+      <Title mt="md" className={classes.title} align="center">{title}</Title>
       <Container size={560} p={0}>
       <Text align={descrAlign} size="sm" className={classes.descr}>{text}</Text>
       </Container>

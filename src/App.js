@@ -73,6 +73,7 @@ const App = () => {
   };
   return (
     <BrowserRouter>
+      <MediaQuery smallerThan="md" styles={{ paddingBottom: 70 }}>
       <AppShell
         styles={{
           main: {
@@ -140,6 +141,7 @@ const App = () => {
           </Routes>
         </div>
       </AppShell>
+      </MediaQuery>
     </BrowserRouter>
   );
 };

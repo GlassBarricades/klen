@@ -19,8 +19,14 @@ const PriceTable = ({ data, filter }) => {
 
   const { classes } = useStyles();
 
+  const priceSort = (arr) => {
+    arr.sort((a, b) => (a.name > b.name ? 1 : -1))
+    return arr;
+  };
+
     const filterDataCatalog = (data, category) => {
-        const arr = data.filter((item) => {
+       const arrSort = priceSort(data);
+        const arr = arrSort.filter((item) => {
           if (item.category === category) {
             return item;
           } else if (category === "Весь каталог") {
