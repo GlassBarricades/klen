@@ -46,7 +46,7 @@ const AppFooter = () => {
               fit="contain"
               height={60}
               width={60}
-              src="http://klen-m.by/images/klen-logo.png"
+              src="https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/klen-logo.png?alt=media&token=e8ed398c-1e98-4418-8f8e-f182e6ce6b88"
             />
             <Text className={classes.footerText}>
               Основу успеха компании составляют инновационность используемых

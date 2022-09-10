@@ -120,12 +120,12 @@ const Catalog = () => {
               styles={{ flexDirection: "column-reverse" }}
             >
               <Grid>
-                <Grid.Col md={9}>
+                <Grid.Col md={10}>
                   <Grid align="flex-end">
                     {filteredCatalog.map((item, key) => {
                       return (
                         <Grid.Col
-                          lg={3}
+                          lg={2}
                           md={4}
                           sm={4}
                           xs={6}
@@ -161,7 +161,7 @@ const Catalog = () => {
                     })}
                   </Grid>
                 </Grid.Col>
-                <Grid.Col md={3}>
+                <Grid.Col md={2}>
                   <SearchInput handler={(e) => setFind(e.target.value)} />
                   <MediaQuery largerThan="md" styles={{ display: "none" }}>
                     <Button

@@ -10,10 +10,10 @@ const Service = () => {
         </Title>
         <Grid>
           <Grid.Col md={6}>
-            <ServiceCard title={"Металлообработка"} img={"http://klen-m.by/images/services/services1.jpg"} link={"metalwork"}/>
+            <ServiceCard title={"Металлообработка"} img={"https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/pic%2Fwelder-metal-svgrepo-com.svg?alt=media&token=86aaae85-d85d-484c-b3bd-5757c1e22240"} link={"metalwork"}/>
           </Grid.Col>
           <Grid.Col md={6}>
-            <ServiceCard title={"Полимерное окрашивание"} img={"http://klen-m.by/images/services/services2.jpg"} link={"coloring"}/>
+            <ServiceCard title={"Полимерное окрашивание"} img={"https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/pic%2Fbucket-svgrepo-com.svg?alt=media&token=a38c4ed0-5654-4757-9ee3-9ca222527ddc"} link={"coloring"}/>
           </Grid.Col>
         </Grid>
       </Container>

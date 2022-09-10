@@ -13,7 +13,7 @@ const ServiceCard = ({ title, img, link }) => {
   const { classes } = useStyles();
   return (
     <Anchor component={Link} to={`/${link}`}>
-      <Paper className={classes.card}>
+      <Paper p="md" className={classes.card}>
         <Image fit="contain" height={180} src={img} />
         <Title align="center">{title}</Title>
       </Paper>

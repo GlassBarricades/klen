@@ -10,52 +10,91 @@ const Contacts = () => {
       title: "Адрес:",
       text: "211501, Витебская обл., г. Новополоцк, ул. Молодежная, д. 166",
       icon: <IconMapPin color="royalblue" size={31} />,
-      links: []
+      links: [],
     },
     {
       title: "Телефон:",
       text: "",
       icon: <IconPhone color="royalblue" size={31} />,
-      links: [{name: "+375293721885", type: "tel", link: "+375293721885"}, {name: "+375175420320", type: "tel", link: "+375175420320" }]
+      links: [
+        { name: "+375293721885", type: "tel", link: "+375293721885" },
+        { name: "+375175420320", type: "tel", link: "+375175420320" },
+      ],
     },
     {
       title: "Электронная почта:",
       text: "",
       icon: <IconMail color="royalblue" size={31} />,
-      links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
+      links: [
+        { name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by" },
+      ],
     },
     {
       title: "График работы:",
       text: "Пн-Пт: 9:00-17:00",
       icon: <IconClock color="royalblue" size={31} />,
-      links: []
-    }
+      links: [],
+    },
   ];
   const contactData2 = [
     {
       title: "Адрес:",
       text: "222053, Минская обл., Минский р-н, Боровлянский с/c, д. 65-1А, р-н д. Малиновка",
       icon: <IconMapPin color="royalblue" size={31} />,
-      links: []
+      links: [],
     },
     {
       title: "Телефон:",
       text: "",
       icon: <IconPhone color="royalblue" size={31} />,
-      links: [{name: "+375293721885", type: "tel", link: "+375293721885"}, {name: "+375175420320", type: "tel", link: "+375175420320" }]
+      links: [
+        { name: "+375293721885", type: "tel", link: "+375293721885" },
+        { name: "+375175420320", type: "tel", link: "+375175420320" },
+      ],
     },
     {
       title: "Электронная почта:",
       text: "",
       icon: <IconMail color="royalblue" size={31} />,
-      links: [{name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by"}]
+      links: [
+        { name: "info@klen-m.by", type: "mailto", link: "info@klen-m.by" },
+      ],
     },
     {
       title: "График работы:",
       text: "Пн-Пт: 9:00-17:00",
       icon: <IconClock color="royalblue" size={31} />,
-      links: []
-    }
+      links: [],
+    },
+  ];
+  const contactPeopleData = [
+    {
+      title: "Отдел продаж",
+      name: "Кулаковский Егор",
+      phoneMobile: "+375293721885",
+      phoneCity: "+375175420320",
+      mail: "info@klen-m.by",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/pic%2Fbusinessman-svgrepo-com.svg?alt=media&token=661426b6-7246-4f4e-8d20-5636541bffec",
+    },
+    {
+      title: "Директор",
+      name: "Чесноков Алексей",
+      phoneMobile: "+375296772648",
+      phoneCity: "+375175420325",
+      mail: "klen_minsk@mail.ru",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/pic%2Fbusinessman-svgrepo-com.svg?alt=media&token=661426b6-7246-4f4e-8d20-5636541bffec",
+    },
+    {
+      title: "Бухгалтер",
+      name: "Акунец Александр",
+      phoneMobile: "+375291363812",
+      phoneCity: "+375175420325",
+      mail: "buhklen@mail.ru",
+      avatar:
+        "https://firebasestorage.googleapis.com/v0/b/klen-824fd.appspot.com/o/pic%2Fbusinessman-svgrepo-com.svg?alt=media&token=661426b6-7246-4f4e-8d20-5636541bffec",
+    },
   ];
   return (
     <>
@@ -63,45 +102,23 @@ const Contacts = () => {
         <Title mb="md" mt="md" order={1} align="center">
           Контакты
         </Title>
-        <ContactSection data={contactData2} title={"Офис"}/>
-        <ContactSection data={contactData} title={"Производство"}/>
+        <ContactSection data={contactData2} title={"Офис"} />
+        <ContactSection data={contactData} title={"Производство"} />
         <Grid mt="md" mb="md">
-          <Grid.Col md={4}>
-            <ContactCard
-              title={"Отдел продаж"}
-              name={"Кулаковский Егор"}
-              phoneMobile={"+375293721885"}
-              phoneCity={"+375175420320"}
-              mail={"info@klen-m.by"}
-              avatar={
-                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
-              }
-            />
-          </Grid.Col>
-          <Grid.Col md={4}>
-            <ContactCard
-              title={"Директор"}
-              name={"Чесноков Алексей"}
-              phoneMobile={"+375296772648"}
-              phoneCity={"+375175420325"}
-              mail={"klen_minsk@mail.ru"}
-              avatar={
-                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
-              }
-            />
-          </Grid.Col>
-          <Grid.Col md={4}>
-            <ContactCard
-              title={"Бухгалтер"}
-              name={"Акунец Александр"}
-              phoneMobile={"+375291363812"}
-              phoneCity={"+375175420325"}
-              mail={"buhklen@mail.ru"}
-              avatar={
-                "https://filestore.community.support.microsoft.com/api/images/f2e55cbf-8316-4d3a-9412-ecd8194b2a72?upload=true"
-              }
-            />
-          </Grid.Col>
+        {contactPeopleData.map((item, i) => {
+              return (
+                <Grid.Col md={4}>
+              <ContactCard
+                title={item.title}
+                name={item.name}
+                phoneMobile={item.phoneMobile}
+                phoneCity={item.phoneCity}
+                mail={item.mail}
+                avatar={item.avatar}
+              />
+            </Grid.Col>
+              )
+            })}
         </Grid>
         <Grid>
           <Grid.Col md={12} className="contacts-text__wrap">
