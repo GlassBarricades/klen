@@ -7,6 +7,7 @@ import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
 import Exclusive from "./pages/Exclusive";
 import SideNav from "./components/UI/Side-nav";
+import { ProductPage } from "./components/UI/Product-page";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { db } from "./firebase";
 import { ref, onValue } from "firebase/database";
@@ -39,7 +40,6 @@ const useStyles = createStyles((theme) => ({
 const App = () => {
   const theme = useMantineTheme();
   const { classes } = useStyles();
-  
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [opened, setOpened] = useState(false);
@@ -133,6 +133,7 @@ const App = () => {
             <Route path="/price" element={<Price data={products} category={categories}/>} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/catalog/:uuid" element={<ProductPage />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/exclusive" element={<Exclusive />} />
             <Route path="/service" element={<Service />} />

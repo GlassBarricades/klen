@@ -13,17 +13,14 @@ import {
   Modal,
   Paper,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import Loader from "../components/admin/Loader";
-import ModalCatalog from "../components/UI/Modal-catalog";
 import SearchInput from "../components/admin/Search-input";
-
 
 const Catalog = () => {
   const [catalog, setCatalog] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [show, setShow] = useState(false);
-  const [data, setData] = useState({});
   const [filter, setFilter] = useState("Весь каталог");
   const [find, setFind] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,54 +44,48 @@ const Catalog = () => {
     });
   }, []);
 
-   useEffect(() => {
-     setLoading(true);
-     onValue(ref(db, `/category/`), (snapshot) => {
-       setCategories([]);
-       const data = snapshot.val();
-       if (data !== null) {
-         Object.values(data).map((item) =>
-           setCategories((oldArray) => [...oldArray, item])
-         );
-         setLoading(false);
-       }
-     });
-   }, []);
+  useEffect(() => {
+    setLoading(true);
+    onValue(ref(db, `/category/`), (snapshot) => {
+      setCategories([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((item) =>
+          setCategories((oldArray) => [...oldArray, item])
+        );
+        setLoading(false);
+      }
+    });
+  }, []);
 
-   const onFilterChange = (filter) => {
-     setFilter(filter);
-     if (filter === "Весь каталог") {
-       setVisibleData(catalog);
-     } else {
-       setVisibleData(catalog.filter((item) => item.category === filter));
-     }
-     setOpened(false);
-   };
-
-   const sortCategory = (arr) => {
-     arr.sort((a, b) => (a.position > b.position ? 1 : -1))
-     return arr;
-   }
-
-   const buttons = sortCategory(categories).map((item, key) => {
-     const isActive = filter === item.name;
-     const variant = isActive ? "outline" : "subtle";
-     return (
-       <Button
-         variant={variant}
-         key={key}
-         onClick={() => onFilterChange(item.name)}
-       >
-         {item.name}
-       </Button>
-     );
-   });
-
-  const handleClose = () => setShow(false);
-  const handleShow = (item) => {
-    setData(item);
-    setShow(true);
+  const onFilterChange = (filter) => {
+    setFilter(filter);
+    if (filter === "Весь каталог") {
+      setVisibleData(catalog);
+    } else {
+      setVisibleData(catalog.filter((item) => item.category === filter));
+    }
+    setOpened(false);
   };
+
+  const sortCategory = (arr) => {
+    arr.sort((a, b) => (a.position > b.position ? 1 : -1));
+    return arr;
+  };
+
+  const buttons = sortCategory(categories).map((item, key) => {
+    const isActive = filter === item.name;
+    const variant = isActive ? "outline" : "subtle";
+    return (
+      <Button
+        variant={variant}
+        key={key}
+        onClick={() => onFilterChange(item.name)}
+      >
+        {item.name}
+      </Button>
+    );
+  });
 
   const filteredCatalog = visibleData.filter((item) => {
     return item.name.toLowerCase().includes(find.toLocaleLowerCase());
@@ -113,7 +104,6 @@ const Catalog = () => {
           >
             <Stack>{buttons}</Stack>
           </Modal>
-          <ModalCatalog data={data} show={show} handleClose={handleClose} />
           <Container mt="xl" fluid>
             <MediaQuery
               smallerThan="md"
@@ -148,10 +138,12 @@ const Catalog = () => {
                               {item.price} руб
                             </Text> */}
                             <Button
-                              variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}
+                              component={Link}
+                              to={`/catalog/${item.uuid}`}
+                              variant="gradient"
+                              gradient={{ from: "blue", to: "royalblue" }}
                               fullWidth
                               style={{ marginTop: 14 }}
-                              onClick={() => handleShow(item)}
                             >
                               Подробнее
                             </Button>
@@ -165,7 +157,8 @@ const Catalog = () => {
                   <SearchInput handler={(e) => setFind(e.target.value)} />
                   <MediaQuery largerThan="md" styles={{ display: "none" }}>
                     <Button
-                      variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}
+                      variant="gradient"
+                      gradient={{ from: "blue", to: "royalblue" }}
                       onClick={() => setOpened(true)}
                     >
                       Категории
@@ -173,7 +166,7 @@ const Catalog = () => {
                   </MediaQuery>
                   <MediaQuery smallerThan="md" styles={{ display: "none" }}>
                     <Paper shadow="sm" radius="md" p="xl">
-                    <Stack>{buttons}</Stack>
+                      <Stack>{buttons}</Stack>
                     </Paper>
                   </MediaQuery>
                 </Grid.Col>

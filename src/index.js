@@ -8,6 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <MantineProvider
     theme={{
+        fontFamily: 'Verdana, sans-serif',
         headings: {
           fontWeight: 400,
           fontFamily: 'Roboto',
