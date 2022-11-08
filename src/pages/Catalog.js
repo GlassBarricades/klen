@@ -110,19 +110,19 @@ const Catalog = () => {
               styles={{ flexDirection: "column-reverse" }}
             >
               <Grid>
-                <Grid.Col md={10}>
+                <Grid.Col md={9}>
                   <Grid align="flex-end">
                     {filteredCatalog.map((item, key) => {
                       return (
                         <Grid.Col
-                          lg={2}
+                          lg={3}
                           md={4}
                           sm={4}
                           xs={6}
                           key={key}
                           className="mb-3"
                         >
-                          <Card shadow="sm" p="lg">
+                          <Card shadow="sm" p="xl">
                             <Card.Section>
                               <Image
                                 fit="contain"
@@ -153,7 +153,7 @@ const Catalog = () => {
                     })}
                   </Grid>
                 </Grid.Col>
-                <Grid.Col md={2}>
+                <Grid.Col md={3}>
                   <SearchInput handler={(e) => setFind(e.target.value)} />
                   <MediaQuery largerThan="md" styles={{ display: "none" }}>
                     <Button
