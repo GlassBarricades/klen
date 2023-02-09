@@ -11,7 +11,7 @@ import {
   MediaQuery,
   Stack,
   Modal,
-  Paper,
+  Paper
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import Loader from "../components/admin/Loader";
@@ -36,13 +36,17 @@ const Catalog = () => {
       setCatalog([]);
       const data = snapshot.val();
       if (data !== null) {
-        Object.values(data).map((product) =>
+        Object.values(data).sort(byField("name")).map((product) =>
           setCatalog((oldArray) => [...oldArray, product])
         );
         setLoading(false);
       }
     });
   }, []);
+
+  function byField(field) {
+  return (a, b) => a[field] > b[field] ? 1 : -1;
+}
 
   useEffect(() => {
     setLoading(true);
@@ -78,6 +82,12 @@ const Catalog = () => {
     const variant = isActive ? "outline" : "subtle";
     return (
       <Button
+      styles={(theme) => ({
+        label: {
+          whiteSpace: "normal",
+          textAlign: "center"
+        }
+      })}
         variant={variant}
         key={key}
         onClick={() => onFilterChange(item.name)}

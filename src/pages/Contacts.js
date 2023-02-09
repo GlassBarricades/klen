@@ -102,8 +102,8 @@ const Contacts = () => {
         <Title mb="md" mt="md" order={1} align="center">
           Контакты
         </Title>
-        <ContactSection data={contactData2} title={"Офис"} />
-        <ContactSection data={contactData} title={"Производство"} />
+        <ContactSection data={contactData2} title={"Офис"} office={true}/>
+        <ContactSection data={contactData} title={"Производство"} office={false}/>
         <Grid mt="md" mb="md">
         {contactPeopleData.map((item, i) => {
               return (

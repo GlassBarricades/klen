@@ -103,6 +103,9 @@ const ProductPage = () => {
             <Text className={classes.catalogItemThick}>
               Толщина металла: {product.thickness}
             </Text>
+            <Text className={classes.catalogItemDim}>
+              Покрытие: {product.coating}
+            </Text>
             <Group>
               <Text className={classes.catalogItemColor}>Цвет: </Text>
               <ColorSwatch color={product.color} />

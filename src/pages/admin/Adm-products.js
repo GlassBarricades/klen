@@ -55,13 +55,17 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
 
   const { classes } = useStyles();
 
+function byField(field) {
+    return (a, b) => a[field] > b[field] ? 1 : -1;
+  }
+
   useEffect(() => {
     setLoading(true);
     onValue(ref(db, `/products/`), (snapshot) => {
       setProducts([]);
       const data = snapshot.val();
       if (data !== null) {
-        Object.values(data).map((product) =>
+        Object.values(data).sort(byField("name")).map((product) =>
           setProducts((oldArray) => [...oldArray, product])
         );
         setLoading(false);
