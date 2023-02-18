@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Table,
   Grid,
@@ -13,10 +13,13 @@ import {
 } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
-import { set, ref, onValue, update } from "firebase/database";
+import { set, ref, update } from "firebase/database";
 import ModalWriteDb from "../../components/admin/Modal-write-db";
 import SearchInput from "../../components/admin/Search-input";
 import LoaderSpinner from "../../components/admin/Loader";
+import useFetchData from "../../hooks/useFetchData";
+import useSortData from "../../hooks/useSortData";
+import useSearchData from "../../hooks/useSearchData";
 
 const useStyles = createStyles((theme) => ({
   tableWrap: {
@@ -37,8 +40,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
-  const [products, setProducts] = useState([]);
-  const [productsCategory, setProductsCategory] = useState([]);
   const [thickness, setThickness] = useState("");
   const [color, setColor] = useState("");
   const [coating, setCoating] = useState("");
@@ -51,41 +52,14 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const [find, setFind] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [tempUuid, setTempUuid] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [products, loading] = useFetchData(`/products/`);
+  const [productsCategory] = useFetchData(`/category/`);
+  const sortCatalog = useSortData(products, "name");
+  const filteredProducts = useSearchData(sortCatalog, "name", find);
+
 
   const { classes } = useStyles();
-
-function byField(field) {
-    return (a, b) => a[field] > b[field] ? 1 : -1;
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    onValue(ref(db, `/products/`), (snapshot) => {
-      setProducts([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).sort(byField("name")).map((product) =>
-          setProducts((oldArray) => [...oldArray, product])
-        );
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    onValue(ref(db, `/category/`), (snapshot) => {
-      setProductsCategory([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((product) =>
-          setProductsCategory((oldArray) => [...oldArray, product])
-        );
-        setLoading(false);
-      }
-    });
-  }, []);
 
   const resetState = () => {
     setName("");
@@ -107,10 +81,6 @@ function byField(field) {
     resetState();
     setIsEdit(false);
   };
-
-  const filteredProducts = products.filter((product) => {
-    return product.name.toLowerCase().includes(find.toLocaleLowerCase());
-  });
 
   const writeToDatabase = (e) => {
     e.preventDefault();

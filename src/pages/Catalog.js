@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { ref, onValue } from "firebase/database";
 import {
   Container,
   Grid,
@@ -11,56 +9,29 @@ import {
   MediaQuery,
   Stack,
   Modal,
-  Paper
+  Paper,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import Loader from "../components/admin/Loader";
 import SearchInput from "../components/admin/Search-input";
+import useFetchData from "../hooks/useFetchData";
+import useSortData from "../hooks/useSortData";
+import useSearchData from "../hooks/useSearchData";
 
 const Catalog = () => {
-  const [catalog, setCatalog] = useState([]);
   const [visibleData, setVisibleData] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState("Весь каталог");
   const [find, setFind] = useState("");
-  const [loading, setLoading] = useState(false);
   const [opened, setOpened] = useState(false);
+
+  const [catalog, loading] = useFetchData(`/products/`);
+  const [categories, categoriesLoading] = useFetchData(`/category/`);
+  const sortCategory = useSortData(categories, "position");
+  const filteredCatalog = useSearchData(visibleData, "name", find);
 
   useEffect(() => {
     setVisibleData(catalog);
   }, [catalog]);
-
-  useEffect(() => {
-    setLoading(true);
-    onValue(ref(db, `/products/`), (snapshot) => {
-      setCatalog([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).sort(byField("name")).map((product) =>
-          setCatalog((oldArray) => [...oldArray, product])
-        );
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  function byField(field) {
-  return (a, b) => a[field] > b[field] ? 1 : -1;
-}
-
-  useEffect(() => {
-    setLoading(true);
-    onValue(ref(db, `/category/`), (snapshot) => {
-      setCategories([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((item) =>
-          setCategories((oldArray) => [...oldArray, item])
-        );
-        setLoading(false);
-      }
-    });
-  }, []);
 
   const onFilterChange = (filter) => {
     setFilter(filter);
@@ -72,22 +43,17 @@ const Catalog = () => {
     setOpened(false);
   };
 
-  const sortCategory = (arr) => {
-    arr.sort((a, b) => (a.position > b.position ? 1 : -1));
-    return arr;
-  };
-
-  const buttons = sortCategory(categories).map((item, key) => {
+  const buttons = sortCategory.map((item, key) => {
     const isActive = filter === item.name;
     const variant = isActive ? "outline" : "subtle";
     return (
       <Button
-      styles={(theme) => ({
-        label: {
-          whiteSpace: "normal",
-          textAlign: "center"
-        }
-      })}
+        styles={(theme) => ({
+          label: {
+            whiteSpace: "normal",
+            textAlign: "center",
+          },
+        })}
         variant={variant}
         key={key}
         onClick={() => onFilterChange(item.name)}
@@ -95,10 +61,6 @@ const Catalog = () => {
         {item.name}
       </Button>
     );
-  });
-
-  const filteredCatalog = visibleData.filter((item) => {
-    return item.name.toLowerCase().includes(find.toLocaleLowerCase());
   });
 
   return (
@@ -144,9 +106,6 @@ const Catalog = () => {
                             <Text size="md" align="center" weight={500} v="lg">
                               {item.name}
                             </Text>
-                            {/* <Text align="center" weight={500}>
-                              {item.price} руб
-                            </Text> */}
                             <Button
                               component={Link}
                               to={`/catalog/${item.uuid}`}
@@ -176,7 +135,11 @@ const Catalog = () => {
                   </MediaQuery>
                   <MediaQuery smallerThan="md" styles={{ display: "none" }}>
                     <Paper shadow="sm" radius="md" p="xl">
-                      <Stack>{buttons}</Stack>
+                      {categoriesLoading ? (
+                        <Loader />
+                      ) : (
+                        <Stack>{buttons}</Stack>
+                      )}
                     </Paper>
                   </MediaQuery>
                 </Grid.Col>

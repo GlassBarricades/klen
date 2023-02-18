@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, ScrollArea, Table, TextInput, createStyles } from "@mantine/core";
 import { db } from "../../firebase";
 import { uid } from "uid";
-import { set, ref, onValue, update } from "firebase/database";
+import { set, ref, update } from "firebase/database";
 import ModalWriteDb from "../../components/admin/Modal-write-db";
 import Loader from "../../components/admin/Loader";
+
+import useFetchData from "../../hooks/useFetchData";
 
 const useStyles = createStyles((theme) => ({
   tableWrap: {
@@ -21,26 +23,12 @@ const useStyles = createStyles((theme) => ({
 const AdmCategory = ({ handleClose, handleShow, show, handleDelete }) => {
   const [position, setPosition] = useState("");
   const [name, setName] = useState("");
-  const [category, setCategory] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempUuid, setTempUuid] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const { classes } = useStyles();
 
-  useEffect(() => {
-    setLoading(true);
-    onValue(ref(db, `/category/`), (snapshot) => {
-      setCategory([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((product) =>
-          setCategory((oldArray) => [...oldArray, product])
-        );
-        setLoading(false);
-      }
-    });
-  }, []);
+  const [category, loading] = useFetchData(`/category/`);
 
   const resetState = () => {
     setPosition("");

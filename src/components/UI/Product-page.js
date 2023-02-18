@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Title } from "@mantine/core";
+import { Container, Paper, Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
@@ -59,7 +59,8 @@ const ProductPage = () => {
 
   return (
     <>
-      <Container>
+    <Container>
+      <Paper mt="md" p="md" shadow="md">
         <Grid mt={20}>
           <Grid.Col md={4}>
             <Image
@@ -121,6 +122,7 @@ const ProductPage = () => {
             </Anchor>
           </Grid.Col>
         </Grid>
+      </Paper>
       </Container>
     </>
   );
