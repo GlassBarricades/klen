@@ -59,70 +59,70 @@ const ProductPage = () => {
 
   return (
     <>
-    <Container>
-      <Paper mt="md" p="md" shadow="md">
-        <Grid mt={20}>
-          <Grid.Col md={4}>
-            <Image
-              height={400}
-              fit="contain"
-              src={product.img}
-              alt={product.name}
-            />
-          </Grid.Col>
-          <Grid.Col md={8}>
-            <Title order={2}>{product.name}</Title>
-            <Text className={classes.catalogItemPrice}>
-              Цена: {product.price} руб
-            </Text>
-            <Group className={classes.catalogMarkers}>
-              {product.top ? (
-                <Badge
-                  variant="gradient"
-                  gradient={{ from: "orange", to: "red" }}
-                >
-                  Товар месяца
-                </Badge>
-              ) : (
-                ""
-              )}
-              {product.news ? (
-                <Badge
-                  variant="gradient"
-                  gradient={{ from: "teal", to: "lime", deg: 105 }}
-                >
-                  Новинка
-                </Badge>
-              ) : (
-                ""
-              )}
-            </Group>
-            <Text className={classes.catalogItemDescr}>{product.descr}</Text>
-            <Text className={classes.catalogItemDim}>
-              Размеры: {product.dimensions}
-            </Text>
-            <Text className={classes.catalogItemThick}>
-              Толщина металла: {product.thickness}
-            </Text>
-            <Text className={classes.catalogItemDim}>
-              Покрытие: {product.coating}
-            </Text>
-            <Group>
-              <Text className={classes.catalogItemColor}>Цвет: </Text>
-              <ColorSwatch color={product.color} />
-            </Group>
-            <Anchor
-              className={classes.catalogItemLink}
-              component="a"
-              size="xl"
-              href={product.drawing}
-              target="_blank"
-            >
-              Чертеж
-            </Anchor>
-          </Grid.Col>
-        </Grid>
-      </Paper>
+      <Container>
+        <Paper mt="md" p="md" shadow="md">
+          <Grid mt={20}>
+            <Grid.Col md={4}>
+              <Image
+                height={400}
+                fit="contain"
+                src={product.img}
+                alt={product.name}
+              />
+            </Grid.Col>
+            <Grid.Col md={8}>
+              <Title order={2}>{product.name}</Title>
+              <Text className={classes.catalogItemPrice}>
+                Цена: {product.price} руб
+              </Text>
+              <Group className={classes.catalogMarkers}>
+                {product.top ? (
+                  <Badge
+                    variant="gradient"
+                    gradient={{ from: "orange", to: "red" }}
+                  >
+                    Товар месяца
+                  </Badge>
+                ) : (
+                  ""
+                )}
+                {product.news ? (
+                  <Badge
+                    variant="gradient"
+                    gradient={{ from: "teal", to: "lime", deg: 105 }}
+                  >
+                    Новинка
+                  </Badge>
+                ) : (
+                  ""
+                )}
+              </Group>
+              <Text className={classes.catalogItemDescr}>{product.descr}</Text>
+              <Text className={classes.catalogItemDim}>
+                Размеры: {product.dimensions}
+              </Text>
+              <Text className={classes.catalogItemThick}>
+                Толщина металла: {product.thickness}
+              </Text>
+              <Text className={classes.catalogItemDim}>
+                Покрытие: {product.coating}
+              </Text>
+              <Group>
+                <Text className={classes.catalogItemColor}>Цвет: </Text>
+                <ColorSwatch color={product.color} />
+              </Group>
+              <Anchor
+                className={classes.catalogItemLink}
+                component="a"
+                size="xl"
+                href={product.drawing}
+                target="_blank"
+              >
+                Чертеж
+              </Anchor>
+            </Grid.Col>
+          </Grid>
+        </Paper>
       </Container>
     </>
   );
