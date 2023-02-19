@@ -1,12 +1,11 @@
-import { useState } from "react";
 import {
   Anchor,
   Image,
   MediaQuery,
   Button,
-  Modal,
   createStyles,
 } from "@mantine/core";
+import { openModal } from "@mantine/modals";
 import MainNav from "./Main-nav";
 import { Link } from "react-router-dom";
 import ContactForm from "./Contact-form";
@@ -25,20 +24,10 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const AppHeader = () => {
-  const [opened, setOpened] = useState(false);
-
   const { classes } = useStyles();
 
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        centered
-        title="Заказать обратный звонок"
-      >
-        <ContactForm />
-      </Modal>
       <div className={classes.headerWrap}>
         <Anchor component={Link} to="/">
           <Image
@@ -55,7 +44,16 @@ const AppHeader = () => {
             variant="gradient"
             gradient={{ from: "blue", to: "royalblue" }}
             color="orange"
-            onClick={() => setOpened(true)}
+            onClick={() => {
+              openModal({
+                title: "Форма заказа звонка",
+                children: (
+                  <>
+                    <ContactForm />
+                  </>
+                ),
+              });
+            }}
           >
             Заказать звонок
           </Button>

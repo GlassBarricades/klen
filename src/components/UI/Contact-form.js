@@ -1,4 +1,5 @@
 import { TextInput, Textarea, Button } from "@mantine/core";
+import { closeAllModals } from "@mantine/modals";
 
 
 const ContactForm = () => {
@@ -19,7 +20,7 @@ const ContactForm = () => {
         required
       />
       <Textarea mt="sm" placeholder="Ваше сообщение" label="Сообщение" />
-      <Button mt="md" variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}>
+      <Button mt="md" onClick={closeAllModals} variant="gradient" gradient={{ from: 'blue', to: 'royalblue' }}>
         Заказать звонок
       </Button>
     </form>

@@ -1,22 +1,26 @@
-import { useState } from "react";
-import { Button, MediaQuery, Modal } from "@mantine/core";
+import { Button, MediaQuery } from "@mantine/core";
 import { IconPhone } from "@tabler/icons";
 import ContactPhone from "./Contact-phone";
+import { openModal } from "@mantine/modals";
 
 const HeaderCallBtn = () => {
-  const [opened, setOpened] = useState(false);
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Телефоны для связи"
-        centered
-      >
-        <ContactPhone />
-      </Modal>
       <MediaQuery smallerThan="lg" styles={{ display: "none" }}>
-        <Button radius="xl" color="green" onClick={() => setOpened(true)}>
+        <Button
+          radius="xl"
+          color="green"
+          onClick={() => {
+            openModal({
+              title: "Телефоны для связи",
+              children: (
+                <>
+                  <ContactPhone />
+                </>
+              ),
+            });
+          }}
+        >
           <IconPhone color="white" size={28} />
         </Button>
       </MediaQuery>
