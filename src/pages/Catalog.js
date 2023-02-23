@@ -3,20 +3,17 @@ import {
   Container,
   Grid,
   Button,
-  Card,
-  Image,
-  Text,
   MediaQuery,
   Stack,
   Modal,
   Paper,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
 import Loader from "../components/admin/Loader";
 import SearchInput from "../components/admin/Search-input";
 import useFetchData from "../hooks/useFetchData";
 import useSortData from "../hooks/useSortData";
 import useSearchData from "../hooks/useSearchData";
+import ProductCard from "../components/UI/Product-card";
 
 const Catalog = () => {
   const [visibleData, setVisibleData] = useState([]);
@@ -27,11 +24,12 @@ const Catalog = () => {
   const [catalog, loading] = useFetchData(`/products/`);
   const [categories, categoriesLoading] = useFetchData(`/category/`);
   const sortCategory = useSortData(categories, "position");
+  const sortCatalog = useSortData(catalog, "name");
   const filteredCatalog = useSearchData(visibleData, "name", find);
 
   useEffect(() => {
-    setVisibleData(catalog);
-  }, [catalog]);
+    setVisibleData(sortCatalog);
+  }, [sortCatalog]);
 
   const onFilterChange = (filter) => {
     setFilter(filter);
@@ -94,29 +92,7 @@ const Catalog = () => {
                           key={key}
                           className="mb-3"
                         >
-                          <Card shadow="sm" p="xl">
-                            <Card.Section>
-                              <Image
-                                fit="contain"
-                                src={item.img}
-                                height={130}
-                                alt="Norway"
-                              />
-                            </Card.Section>
-                            <Text size="md" align="center" weight={500} v="lg">
-                              {item.name}
-                            </Text>
-                            <Button
-                              component={Link}
-                              to={`/catalog/${item.uuid}`}
-                              variant="gradient"
-                              gradient={{ from: "blue", to: "royalblue" }}
-                              fullWidth
-                              style={{ marginTop: 14 }}
-                            >
-                              Подробнее
-                            </Button>
-                          </Card>
+                          <ProductCard img={item.img} name={item.name} uuid={item.uuid} link={`/catalog/${item.uuid}`}/>
                         </Grid.Col>
                       );
                     })}
