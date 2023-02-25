@@ -13,7 +13,9 @@ import SearchInput from "../components/admin/Search-input";
 import useFetchData from "../hooks/useFetchData";
 import useSortData from "../hooks/useSortData";
 import useSearchData from "../hooks/useSearchData";
-import ProductCard from "../components/UI/Product-card";
+import { ProductPage } from "../components/UI/Product-page";
+import CatalogGrid from "../components/UI/Catalog-grid";
+import { Link, Route, Routes } from "react-router-dom";
 
 const Catalog = () => {
   const [visibleData, setVisibleData] = useState([]);
@@ -46,6 +48,8 @@ const Catalog = () => {
     const variant = isActive ? "outline" : "subtle";
     return (
       <Button
+        component={Link}
+        to={`${item.name}`}
         styles={(theme) => ({
           label: {
             whiteSpace: "normal",
@@ -81,22 +85,19 @@ const Catalog = () => {
             >
               <Grid>
                 <Grid.Col md={9}>
-                  <Grid align="flex-end">
-                    {filteredCatalog.map((item, key) => {
-                      return (
-                        <Grid.Col
-                          lg={3}
-                          md={4}
-                          sm={4}
-                          xs={6}
-                          key={key}
-                          className="mb-3"
-                        >
-                          <ProductCard img={item.img} name={item.name} uuid={item.uuid} link={`/catalog/${item.uuid}`}/>
-                        </Grid.Col>
-                      );
-                    })}
-                  </Grid>
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={<CatalogGrid filteredCatalog={catalog} />}
+                    />
+                    <Route
+                      path=":category"
+                      element={
+                        <CatalogGrid filteredCatalog={filteredCatalog} />
+                      }
+                    />
+                    <Route path=":category/:uuid" element={<ProductPage />} />
+                  </Routes>
                 </Grid.Col>
                 <Grid.Col md={3}>
                   <SearchInput handler={(e) => setFind(e.target.value)} />

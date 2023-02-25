@@ -7,7 +7,6 @@ import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
 import Exclusive from "./pages/Exclusive";
 import SideNav from "./components/UI/Side-nav";
-import { ProductPage } from "./components/UI/Product-page";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import useFetchData from "./hooks/useFetchData";
 
@@ -114,19 +113,18 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="about-us" element={<AboutUs />} />
               <Route
-                path="/price"
+                path="price"
                 element={<Price data={products} category={categoryPriceData} />}
               />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/catalog/:uuid" element={<ProductPage />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/exclusive" element={<Exclusive />} />
-              <Route path="/service" element={<Service />} />
-              <Route path="/metalwork" element={<MetalWork />} />
-              <Route path="/coloring" element={<Coloring />} />
+              <Route path="contacts" element={<Contacts />} />
+              <Route path="catalog/*" element={<Catalog />} />
+              <Route path="admin" element={<Admin />} />
+              <Route path="exclusive" element={<Exclusive />} />
+              <Route path="service" element={<Service />} />
+              <Route path="metalwork" element={<MetalWork />} />
+              <Route path="coloring" element={<Coloring />} />
             </Routes>
           </div>
         </AppShell>
