@@ -10,30 +10,36 @@ import {
   Select,
   createStyles,
   Textarea,
+  FileButton,
+  Group,
+  Text,
+  Image,
 } from "@mantine/core";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 import { uid } from "uid";
 import { set, ref, update } from "firebase/database";
+import { ref as refFile, uploadBytes, getDownloadURL } from "firebase/storage";
 import ModalWriteDb from "../../components/admin/Modal-write-db";
 import SearchInput from "../../components/admin/Search-input";
 import LoaderSpinner from "../../components/admin/Loader";
 import useFetchData from "../../hooks/useFetchData";
 import useSortData from "../../hooks/useSortData";
 import useSearchData from "../../hooks/useSearchData";
+import { Upload } from "tabler-icons-react";
 
 const useStyles = createStyles((theme) => ({
   tableWrap: {
-    height: "65vh"
+    height: "65vh",
   },
   controlWrap: {
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   findInput: {
-    maxWidth: "25rem"
-  }
+    maxWidth: "25rem",
+  },
 }));
 
 const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
@@ -58,33 +64,15 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   const sortCatalog = useSortData(products, "name");
   const filteredProducts = useSearchData(sortCatalog, "name", find);
 
+  const [imageUpload, setImageUpload] = useState(null);
+  const [drawingUpload, setDrawingUpload] = useState(null);
 
   const { classes } = useStyles();
 
-  const resetState = () => {
-    setName("");
-    setCategory("");
-    setPrice("");
-    setThickness("");
-    setCoating("");
-    setColor("");
-    setTop("");
-    setNews("");
-    setImg("");
-    setDrawing("");
-    setDescr("");
-    setDimensions("");
-  };
-
-  const closeReset = () => {
-    handleClose();
-    resetState();
-    setIsEdit(false);
-  };
-
-  const writeToDatabase = (e) => {
+  function writeToDatabase(e) {
     e.preventDefault();
     const uuid = uid();
+
     set(ref(db, `/products/${uuid}`), {
       name,
       category,
@@ -103,7 +91,50 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
 
     resetState();
     handleClose();
+  }
+
+  function resetState() {
+    setName("");
+    setCategory("");
+    setPrice("");
+    setThickness("");
+    setCoating("");
+    setColor("");
+    setTop("");
+    setNews("");
+    setImg("");
+    setDrawing("");
+    setDescr("");
+    setDimensions("");
+    setImageUpload(null);
+    setDrawingUpload(null);
+  }
+
+  const closeReset = () => {
+    handleClose();
+    resetState();
+    setIsEdit(false);
   };
+
+  const uploadFile = () => {
+    if (imageUpload == null) return;
+    const imageRef = refFile(storage, `images/${imageUpload.name + uid()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImg(url);
+      });
+    });
+  };
+  const uploadFileDrawing = () => {
+    if (drawingUpload == null) return;
+    const imageRef = refFile(storage, `drawing/${drawingUpload.name + uid()}`);
+    uploadBytes(imageRef, drawingUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setDrawing(url);
+      });
+    });
+  };
+
   const handleEdit = (product) => {
     setIsEdit(true);
     setTempUuid(product.uuid);
@@ -153,7 +184,7 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
   };
 
   const createCategories = productsCategory.map((item) => {
-    const token = {value: "", label: ""};
+    const token = { value: "", label: "" };
     token.value = item.name;
     token.label = item.name;
     return token;
@@ -184,7 +215,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
               placeholder="Цена"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              required
             />
             <TextInput
               label="Толщина металла"
@@ -205,8 +235,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
               onChange={setColor}
               swatches={["#ffffff", "#000000", "#a69292"]}
             />
-          </Grid.Col>
-          <Grid.Col md={6}>
             <Switch
               mt="lg"
               label="Товар месяца"
@@ -223,19 +251,6 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
               onChange={handlerChangeNews}
               checked={news}
             />
-            <TextInput
-              mt="lg"
-              label="Картинка"
-              placeholder="Картинка"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
-            />
-            <TextInput
-              label="Чертеж"
-              placeholder="Чертеж"
-              value={drawing}
-              onChange={(e) => setDrawing(e.target.value)}
-            />
             <Textarea
               label="Описание"
               placeholder="Описание"
@@ -250,6 +265,50 @@ const AdmProducts = ({ handleClose, handleShow, show, handleDelete }) => {
               value={dimensions}
               onChange={(e) => setDimensions(e.target.value)}
             />
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <Text>Добавление картинки продукта</Text>
+            <Group position="left">
+              <FileButton
+                onChange={setImageUpload}
+                accept="image/png,image/jpeg"
+              >
+                {(props) => <Button {...props}>Выбрать картинку</Button>}
+              </FileButton>
+              <Button leftIcon={<Upload />} onClick={uploadFile}>
+                Загрузить
+              </Button>
+            </Group>
+
+            {imageUpload && (
+              <Text size="sm" align="center" mt="sm">
+                Выбранный файл: {imageUpload.name}
+              </Text>
+            )}
+            {img !== "" && (
+              <Image fit="contain" height={220} src={img} alt={name} />
+            )}
+            <Text mt="md">Добавление чертежа продукта</Text>
+            <Group position="left">
+              <FileButton
+                onChange={setDrawingUpload}
+                accept="image/png,image/jpeg"
+              >
+                {(props) => <Button {...props}>Выбрать чертеж</Button>}
+              </FileButton>
+              <Button leftIcon={<Upload />} onClick={uploadFileDrawing}>
+                Загрузить
+              </Button>
+            </Group>
+
+            {drawingUpload && (
+              <Text size="sm" align="center" mt="sm">
+                Выбранный файл: {drawingUpload.name}
+              </Text>
+            )}
+            {drawing !== "" && (
+              <Image fit="contain" height={220} src={drawing} alt={name} />
+            )}
           </Grid.Col>
         </Grid>
       </form>
